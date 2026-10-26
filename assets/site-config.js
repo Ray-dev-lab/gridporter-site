@@ -1,6 +1,6 @@
 /* 公開リンクはここで管理。未確定値は空文字のままにしてください。 */
 window.GRIDPORTER_CONFIG = Object.freeze({
-  siteUrl: '',
+  siteUrl: 'https://ray-dev-lab.github.io/gridporter-site/',
   chromeWebStoreUrl: '',
   supportEmail: '',
   supportUrl: '',

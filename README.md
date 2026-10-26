@@ -45,11 +45,11 @@ node --check scripts/sync-metadata.mjs
 
 ## リンク・正式ドメインの設定
 
-`assets/site-config.js` で管理します。現時点で `siteUrl = ''`、`supportEmail = ''` を維持します。架空の宛先は設定しません。
+`assets/site-config.js` で管理します。GridPorter 0.4.1 betaでは `https://ray-dev-lab.github.io/gridporter-site/` を正式サイトURLとして使用します。`supportEmail = ''` は人間が窓口を確定するまで維持し、架空の宛先は設定しません。
 
 |設定|用途|
 |---|---|
-|siteUrl|確定した独自ドメインのHTTPSルートURL。末尾 `/`|
+|siteUrl|正式βサイトのHTTPS URL。将来の独自ドメインにも変更可能。末尾 `/`|
 |chromeWebStoreUrl|確定したChrome Web Store詳細URL。未設定ならCTA非表示|
 |supportEmail|受信・返信を確認した窓口。未設定ならメールCTA非表示|
 |supportUrl|確定した問い合わせ案内URL。未設定ならCTA非表示|
@@ -59,20 +59,20 @@ node --check scripts/sync-metadata.mjs
 
 公開本文・Privacy・Terms・SupportはJS無効でも閲覧できます。Privacy / Termsの静的ナビゲーションはHTMLにも記載しているため、パス変更時は全HTMLと設定を同期してください。
 
-## GitHub Pagesと独自ドメイン
+## 正式βサイトのGitHub Pages公開
 
 1. mainへpushし、Settings → Pages → Source **Deploy from a branch** → **main / (root)** を指定します。
-2. 独自ドメインを確定してPagesのCustom domainとDNSを設定します。DNSの管理資格情報をこのRepositoryに保存しません。
-3. HTTPS証明書の有効性を確認し、Enforce HTTPSを有効にします。
-4. 正式なHTTPS URLを `siteUrl` へ入力し、問い合わせ窓口・実画像を設定します。
+2. 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` の配信とHTTPS証明書の有効性を確認し、Enforce HTTPSを有効にします。
+3. `siteUrl` が上記URLであることを確認します。GitHub Pagesのhostnameとpathnameは正確な組み合わせだけを許可します。
+4. 人間が用意した問い合わせ窓口・実画像を設定し、Privacy / Terms / Supportを最終確認します。
 5. `node scripts/sync-metadata.mjs` で全ページのcanonical / og:url / 実画像のog:image、および404のbase pathを反映しpushします。
 6. [必須チェック](docs/RELEASE_CHECKLIST.md)を終え、`python scripts/check-site.py --release` を実行します。
 
-**このプロジェクトではCWS提出時に独自ドメインを必須とします。GitHub.ioのURLは提出用の正式URLに使用しません。** 独自ドメイン未確定なので、現在canonical / og:url / og:imageは出力しません。OGのtitle・description等は設定済みです。
+**GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用します。独自ドメインは有料化・正式ブランド展開時に再検討します。** 独自ドメイン取得をCWS提出のプロジェクト必須条件にはしません。canonical / og:urlは正式βサイトのURLを出力し、og:imageは実画像の登録後に同期します。OGのtitle・description等は設定済みです。
 
 通常ページは相対URLを使用します。404だけは未知の深いパスからも戻れるようルート相対パスを使い、正式URL未設定時は `/gridporter-site/`、設定後は同期スクリプトが正式URLのpathnameへ更新します。独自ドメインのルート配信では `/` です。
 
-GitHub Pagesの[branch公開](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)と[独自ドメイン設定](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)の手順も参照してください。
+GitHub Pagesの[branch公開](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)を参照してください。将来、独自ドメインへ移行する際は[Custom domainとDNS](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)・HTTPSを整備し、siteUrlを変更してメタ情報を同期します。DNSの管理資格情報はRepositoryに保存しません。
 
 ## 本体・Privacy・Termsとの同期
 
