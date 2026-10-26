@@ -1,0 +1,26 @@
+name: Site check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  static-site:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Check public files and internal links
+        run: python scripts/check-site.py
+      - name: Check local JavaScript syntax
+        run: |
+          node --check assets/site.js
+          node --check assets/site-config.js
+          node --check scripts/sync-metadata.mjs
