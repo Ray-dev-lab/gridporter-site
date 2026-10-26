@@ -23,6 +23,15 @@ if not BASE_PATH.endswith('/'): BASE_PATH += '/'
 def fail(file, message):
     ERRORS.append(f'{file}: {message}')
 
+# 正規表現の表記自体をRepository全体のブランド検索で誤検出しない形にする。
+brand_guard = re.compile(r'Table[P]ilot|Ray[A]kira7|GridPorter\s+JP', re.I)
+for path in ROOT.rglob('*.html'):
+    relative = path.relative_to(ROOT)
+    if any(part in {'.git', '.qa', 'node_modules'} for part in relative.parts):
+        continue
+    for match in brand_guard.finditer(path.read_text(encoding='utf-8')):
+        fail(relative, f'禁止ブランド表記: {match.group()}')
+
 class Document(HTMLParser):
     def __init__(self, file):
         super().__init__(convert_charrefs=True)
