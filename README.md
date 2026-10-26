@@ -45,7 +45,7 @@ node --check scripts/sync-metadata.mjs
 
 ## リンク・正式ドメインの設定
 
-`assets/site-config.js` で管理します。GridPorter 0.4.1 betaでは `https://ray-dev-lab.github.io/gridporter-site/` を正式サイトURLとして使用します。`supportEmail = ''` は人間が窓口を確定するまで維持し、架空の宛先は設定しません。
+`assets/site-config.js` で管理します。GridPorter 0.4.1 betaでは `https://ray-dev-lab.github.io/gridporter-site/` を正式サイトURLとして使用します。supportEmailは `raydevsupport@gmail.com` に設定済みです。公開前に実際の受信・返信を確認してください。架空の宛先は設定しません。
 
 |設定|用途|
 |---|---|

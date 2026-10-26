@@ -18,6 +18,6 @@
 - [ ] `node scripts/sync-metadata.mjs` でcanonical / OG / 404を反映し、公開ページで確認。
 - [ ] `python scripts/check-site.py --release` を実行し、CWS提出前の必須条件を満たす。
 
-siteUrlは正式βサイトのURLを設定済みです。supportEmail、supportUrl、chromeWebStoreUrl、実画像は未設定です。Privacy / Terms / Supportの最終確認フラグはfalseです。架空情報は公開ページに表示しません。
+siteUrlは正式βサイトのURL、supportEmailは `raydevsupport@gmail.com` を設定済みです。メールの受信・返信は別途確認してください。supportUrl、chromeWebStoreUrl、実画像は未設定です。Privacy / Terms / Supportの最終確認フラグはfalseです。架空情報は公開ページに表示しません。
 
 将来の販売事業者情報・価格・支払・提供・更新・解約・返金は別途決定し、[販売表示テンプレート](COMMERCIAL_DISCLOSURE_TEMPLATE.md)を利用してください。現在は購入ボタンを設置しません。
