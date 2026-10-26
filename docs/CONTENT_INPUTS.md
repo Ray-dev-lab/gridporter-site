@@ -2,8 +2,8 @@
 
 対象：GridPorter 0.4.1 beta。現在は有料販売を行いません。
 
-- [ ] 独自ドメインを決定し、DNS / Pages Custom domain / HTTPSを確認。
-- [ ] 正式なHTTPSルートURLを `assets/site-config.js` のsiteUrlへ設定。GitHub.ioはCWS提出用に使わない。
+- [ ] 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` のPages配信とHTTPSを確認。
+- [ ] `assets/site-config.js` のsiteUrlが上記URLと一致することを確認。GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用し、独自ドメインは有料化・正式ブランド展開時に再検討する。
 - [ ] 公開窓口のsupportEmailを設定し、実際の受信・返信を確認。個人用メールを推測して設定しない。
 - [ ] Publisher name / 運営主体と必要な表示情報を確定し、Privacy・Termsに反映。Git Authorから法的な運営主体を推測しない。
 - [ ] 問い合わせで受信した情報の保存先・保持期間・削除依頼・処理事業者等を確定しPrivacyへ反映。
@@ -18,6 +18,6 @@
 - [ ] `node scripts/sync-metadata.mjs` でcanonical / OG / 404を反映し、公開ページで確認。
 - [ ] `python scripts/check-site.py --release` を実行し、CWS提出前の必須条件を満たす。
 
-現在siteUrl、supportEmail、supportUrl、chromeWebStoreUrl、実画像は未設定です。Privacy / Terms / Supportの最終確認フラグはfalseです。架空情報は公開ページに表示しません。
+siteUrlは正式βサイトのURL、supportEmailは `raydevsupport@gmail.com` を設定済みです。メールの受信・返信は別途確認してください。supportUrl、chromeWebStoreUrl、実画像は未設定です。Privacy / Terms / Supportの最終確認フラグはfalseです。架空情報は公開ページに表示しません。
 
 将来の販売事業者情報・価格・支払・提供・更新・解約・返金は別途決定し、[販売表示テンプレート](COMMERCIAL_DISCLOSURE_TEMPLATE.md)を利用してください。現在は購入ボタンを設置しません。

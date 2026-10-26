@@ -26,13 +26,16 @@
 
 - 静的検査：5ページ / 公開テキスト9ファイルの内部リンク・アンカー・必須meta・禁止参照・外部リソース検査に合格。
 - site.js / site-config.js / sync-metadata.mjsのNode構文検査に合格。
-- 正式URL未設定時にcanonical / og:url / og:imageを出力しないこと、siteUrlとsupportEmailが空であることを確認。
+- 正式βサイトは `https://ray-dev-lab.github.io/gridporter-site/`。GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用し、独自ドメインは有料化・正式ブランド展開時に再検討する。
+- siteUrlを正式βサイトへ設定し、4ページのcanonical / og:urlを同期。404のbase pathは `/gridporter-site/`。supportEmailは `raydevsupport@gmail.com` に設定。確認フラグはfalse、実画像は未登録のまま維持。
 - ローカルChromeで1440px / 390px / 320px × 主要4ページの12表示を確認。ページ全体の横はみ出し、JavaScriptエラーなし。トップ画像でGridPorterのブランド・レイアウトを目視確認。
 - FAQ開閉・Tab操作・visible focus、未設定CTAの非表示、テスト用設定差し替え時の宛先、不正設定の非表示、JS無効時のPrivacy / Terms / Support本文を確認。
 - 通常読込みで第三者リクエスト・Cookie・localStorage / sessionStorageへの保存なし。
-- リリースゲート10シナリオに合格。隔離した一時fixtureとHTTPS応答の模擬を使用。必要条件が揃う場合の成功と、GitHub.io、HTTP、未設定メール、Privacy / Terms / Supportの各未確認フラグ、未配置画像、canonical欠落、OG画像欠落の拒否を確認。テスト用画像・宛先は公開ファイルに含めない。
-- 現在の実設定で `--release` が失敗し、独自ドメイン・メール・最終確認・実画像の不足を報告することを確認。
+- URLゲートでは指定のGitHub Pages hostname / pathnameだけをβサイトとして許可し、将来の独自ドメイン対応を維持。HTTP、ローカル・予約ドメイン、IPアドレス、認証情報、query / hash、別のGitHub Pagesのhostname / pathnameは拒否。
+- 隔離した一時fixtureでURLゲート28ケースを確認。正式β URL・将来の独自ドメインを許可し、別のGitHub Pages、パス違い、予約ドメイン、認証情報、空を含むquery / hash、明示port等を拒否。テスト用宛先は公開ファイルに保存しない。
+- 現在の実設定で `--release` は最終確認フラグ3件・実画像の不足により失敗する。GitHub Pagesであることや独自ドメイン不足を理由には失敗しない。実画像のog:imageは登録後に検査する。
+- 4ページの変更はcanonical / og:urlの同期のみで、本文・デザイン・CSPは維持。404は変更前と同一で、base pathは `/gridporter-site/`。通常site checkと指定のNode構文検査3件に合格。
 - source全体の旧ブランド残存検索は0件。確認用の不要な文言や移行記録を公開ファイルに残さない。
 - CIはPR / main pushで静的検査とJS構文検査を行う。checkoutはcommit固定・contents read・認証情報保持なし。
 
-正式ドメイン・メール・実画像は未設定です。公開環境のHTTPS、メール受信、実画像の真実性、法的な最終確認、スクリーンリーダー実機の確認は残っています。実環境のHTTPSを模擬検証で確認済みとは扱いません。CI実行状況はRepositoryのActionsで確認してください。
+実画像は未設定です。正式βサイトURL・メールの設定と公開環境での反映確認は区別します。公開環境のHTTPS・メタ情報反映、メール受信、実画像の真実性、法的な最終確認、スクリーンリーダー実機の確認は残っています。実環境のHTTPSを模擬検証で確認済みとは扱いません。CI実行状況はRepositoryのActionsで確認してください。

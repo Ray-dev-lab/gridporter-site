@@ -118,14 +118,17 @@ if not (ROOT / '.nojekyll').exists(): fail('.nojekyll', 'ファイルなし')
 
 if RELEASE:
     host = BASE.hostname or ''
-    valid_domain = bool(host and '.' in host and not host.endswith(('.github.io', '.test', '.invalid', '.localhost', '.example')) and host not in {'github.io', 'localhost', 'example.com', 'example.org', 'example.net'})
+    github_pages = host == 'github.io' or host.endswith('.github.io')
+    valid_domain = bool(host and '.' in host and not host.endswith(('.', '.test', '.invalid', '.localhost', '.example')) and not any(host == reserved or host.endswith('.' + reserved) for reserved in ('example.com', 'example.org', 'example.net')))
+    if github_pages:
+        valid_domain = host == 'ray-dev-lab.github.io' and BASE.path == '/gridporter-site/'
     try:
         ipaddress.ip_address(host)
         valid_domain = False
     except ValueError:
         pass
-    if BASE.scheme != 'https' or BASE.username or BASE.password or BASE.query or BASE.fragment or BASE.port or not valid_domain:
-        fail('release', '独自ドメインの正式HTTPS siteUrlが必要です')
+    if BASE.scheme != 'https' or BASE.username is not None or BASE.password is not None or '?' in CONFIG['siteUrl'] or '#' in CONFIG['siteUrl'] or BASE.port is not None or not valid_domain:
+        fail('release', '有効な正式HTTPS siteUrlが必要です（βサイトは指定のhostname・pathnameのみ許可）')
     email = CONFIG.get('supportEmail', '')
     if not re.fullmatch(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", email):
         fail('release', '実際に受信できるsupportEmailが必要です')
@@ -154,7 +157,7 @@ if RELEASE:
             doc = docs.get(name)
             if not doc or doc.canonicals != [expected] or doc.metas.get('og:url') != expected:
                 fail(name, '正式URLに一致する静的canonical / og:urlが必要です')
-            if not doc or not first_src or doc.metas.get('og:image') != base_url + first_src or not doc.metas.get('og:image:alt'):
+            if first_src and (not doc or doc.metas.get('og:image') != base_url + first_src or not doc.metas.get('og:image:alt')):
                 fail(name, '実画像を使ったog:image / og:image:altが必要です')
         # 設定漏れがある間はネットワーク検証へ進めない。
         if not ERRORS:

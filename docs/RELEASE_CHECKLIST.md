@@ -1,6 +1,6 @@
 # CWS提出前の必須ゲート
 
-通常CIとCWS提出判定を分けます。現在はドメイン・メール・実画像未設定のため、**CWS提出不可**が正しい状態です。
+通常CIとCWS提出判定を分けます。GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用します。独自ドメインは有料化・正式ブランド展開時に再検討します。メールは設定済みですが、人間による最終確認・実画像が未設定のため、**CWS提出不可**が正しい状態です。メール受信・返信の実確認も必要です。
 
 ## 通常CI
 
@@ -13,9 +13,9 @@ PR / main pushで上記を実行します。通常検査では未確定の正式
 
 ## CWS提出必須項目
 
-- [ ] 独自ドメインを所有・管理し、Pagesに設定。GitHub.ioを提出URLにしない。
+- [ ] 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` をmain / rootで配信。
 - [ ] 有効な証明書によるHTTPS配信とHTTP→HTTPSを実アクセスで確認。
-- [ ] siteUrlに正式な独自ドメインのHTTPS URLを設定。
+- [ ] siteUrlが正式βサイトのHTTPS URLと一致することを確認。hostnameは `ray-dev-lab.github.io`、pathnameは `/gridporter-site/` とし、任意のGitHub.ioサイトを許可しない。
 - [ ] `node scripts/sync-metadata.mjs` を実行し、4ページのcanonical / og:url / og:image / og:image:altを反映。
 - [ ] supportEmailを設定して送受信を確認。窓口CTAが表示されることを確認。
 - [ ] Privacyを実配布ビルドと照合し、運営主体・問い合わせ情報の取扱いを確定。
@@ -25,7 +25,7 @@ PR / main pushで上記を実行します。通常検査では未確定の正式
 - [ ] 実スクリーンショットを1280×800 PNGで配置し、src / altを登録。実画面であることと機密情報の除去を人間が確認。
 - [ ] 反映後に `python scripts/check-site.py --release` が成功。
 
-release検査は独自ドメイン・HTTPS URL・メール書式・確認フラグ・実PNGの存在と寸法・静的canonical / OGを検査し、条件が揃うと正式URLの4ページへHTTPSアクセスして応答・最終URL・配信されたcanonical / og:urlも確認します。メールの実在・受信、画像の真実性、法的な最終確認、DNS管理権限は人間の確認が必要です。
+release検査は正式HTTPS URL・メール書式・確認フラグ・実PNGの存在と寸法・静的canonical / OGを検査し、条件が揃うと正式URLの4ページへHTTPSアクセスして応答・最終URL・配信されたcanonical / og:urlも確認します。実画像未登録時は画像不足を報告し、登録後はog:imageも必須です。メールの実在・受信、画像の真実性、法的な最終確認は人間の確認が必要です。独自ドメイン不足を理由にβ公開を止めません。将来の独自ドメイン移行時にはDNS管理権限とHTTPSも確認してください。
 
 ## 最後の実確認
 
