@@ -15,7 +15,7 @@ terms/index.html                   利用規約
 support/index.html                 サポートガイド
 404.html                           不明なページ
 assets/site-config.js              公開URL・窓口・実画像・確認フラグ
-assets/site.js                     設定済みCTA・実画像だけを表示
+assets/site.js                     問い合わせ固定テンプレート・CTA・実画像の表示
 assets/style.css                   共通スタイル
 assets/favicon.svg                 ローカルアイコン
 assets/screenshots/                実画面の配置先（現在画像なし）
@@ -55,13 +55,31 @@ PR・main pushのGitHub Actionsで静的・構文・回帰検査を実行しま�
 |siteUrl|正式βサイトのHTTPS URL。将来の独自ドメインにも変更可能。末尾 `/`|
 |chromeWebStoreUrl|確定したChrome Web Store詳細URL。未設定ならCTA非表示|
 |supportEmail|受信・返信を確認した窓口。未設定ならメールCTA非表示|
-|supportSubject|`[GridPorter] お問い合わせ`。mailtoの件名として安全にエンコード|
+|supportSubject|一般問い合わせの件名。`[GridPorter] お問い合わせ`を維持し、安全にエンコード|
 |supportUrl|確定した問い合わせ案内URL。未設定ならCTA非表示|
 |privacyUrl / termsUrl|サイト内ページの相対パス|
 |screenshots|実在するPNGのsrcとalt|
 |release|Privacy / Terms / Supportの人間による最終確認フラグ|
 
 公開本文・Privacy・Terms・SupportはJS無効でも閲覧できます。Privacy / Termsの静的ナビゲーションはHTMLにも記載しているため、パス変更時は全HTMLと設定を同期してください。
+
+## 問い合わせメールのテンプレート
+
+Supportページ上部の「メールでお問い合わせ」から、5種類の導線へ移動できます。種類を選ぶと、利用者のメールアプリで作成画面を開きます。サイトから送信はしません。
+
+|種類|件名|本文の主な項目|
+|---|---|---|
+|不具合報告|`[GridPorter] 不具合報告`|version・環境・機能・問題・手順・期待/実際・診断・頻度|
+|使い方|`[GridPorter] 使い方の質問`|質問・機能・試した操作・必要に応じversion/環境|
+|改善要望|`[GridPorter] 改善要望`|改善点・困り事・希望機能・任意の利用場面|
+|データ・プライバシー|`[GridPorter] データ・プライバシー相談`|相談内容・対象機能・確認事項/希望対応。秘密情報は求めない|
+|その他|既存のsupportSubject|問い合わせ内容・任意の補足|
+
+本文・種別固有件名は `assets/site.js` のsupportTemplatesだけで定義します。受信先は引き続きsite-configのsupportEmailを使用し、設定項目は増やしません。既存の `data-config-link="supportEmail"` は一般問い合わせの固定本文を使用し、メールアドレス表示も維持します。種別付きリンクの表示名はHTMLを維持します。
+
+件名は正確な `[GridPorter]` から開始し、CR/LF・制御文字を拒否します。正当な本文改行はCRLFへ統一し、件名・本文を個別にURLエンコードします。許可リスト外の種類、ページのquery/hash、追加の設定値からテンプレートは作りません。完成URLは2,048文字を上限とし、固定文面のみで利用者のURL・環境・抽出データを自動挿入しません。
+
+送信前の編集・削除・送信判断はメールアプリで利用者が行います。サイトに本文入力・保存・送信機能はありません。メールアプリの設定やブラウザー/端末のmailto対応により、起動しない・本文が省略される場合があります。その場合はSupportの常時表示される宛先と件名形式から手動作成してください。この静的な宛先表示は `node scripts/sync-metadata.mjs` がsupportEmailから同期し、テストでも一致を確認するため、別の設定値として管理しません。
 
 ## 正式βサイトのGitHub Pages公開
 
