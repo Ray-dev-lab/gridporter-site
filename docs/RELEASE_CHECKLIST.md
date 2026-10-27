@@ -1,6 +1,6 @@
-# CWS提出前の必須ゲート
+# サイト公開準備とCWS提出資産の確認
 
-通常CIとCWS提出判定を分けます。GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用します。独自ドメインは有料化・正式ブランド展開時に再検討します。メールは設定済みですが、人間による最終確認・実画像が未設定のため、**CWS提出不可**が正しい状態です。メール受信・返信の実確認も必要です。
+対象：GridPorter 0.4.2 beta。正式サイトはGitHub Pages標準URLです。独自ドメインは有料化・正式ブランド展開時に再検討します。サイトのrelease検査と、CWS提出用画像等の資産準備は分離します。
 
 ## 通常CI
 
@@ -8,33 +8,42 @@
 - [ ] `node --check assets/site.js`
 - [ ] `node --check assets/site-config.js`
 - [ ] `node --check scripts/sync-metadata.mjs`
+- [ ] `node --test tests/site.test.cjs`
+- [ ] `python -m unittest discover -s tests -p "test_*.py"`
 
-PR / main pushで上記を実行します。通常検査では未確定の正式URLやメールを要求しません。
+PR / main pushで実行します。メールリンクの入力検証・件名エンコード・CR/LF拒否・本文収集なしを確認します。
 
-## CWS提出必須項目
+## サイトのreleaseゲート
 
-- [ ] 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` をmain / rootで配信。
-- [ ] 有効な証明書によるHTTPS配信とHTTP→HTTPSを実アクセスで確認。
-- [ ] siteUrlが正式βサイトのHTTPS URLと一致することを確認。hostnameは `ray-dev-lab.github.io`、pathnameは `/gridporter-site/` とし、任意のGitHub.ioサイトを許可しない。
-- [ ] `node scripts/sync-metadata.mjs` を実行し、4ページのcanonical / og:url / og:image / og:image:altを反映。
-- [ ] supportEmailを設定して送受信を確認。窓口CTAが表示されることを確認。
-- [ ] Privacyを実配布ビルドと照合し、運営主体・問い合わせ情報の取扱いを確定。
-- [ ] Termsを人間が確認し、運営主体・準拠法・裁判管轄等を確定。
-- [ ] Supportの問い合わせ方法・対象・注意事項を人間が確認。
-- [ ] 上記の最終確認後、release内のprivacyReviewed / termsReviewed / supportReviewedをtrueにする。
-- [ ] 実スクリーンショットを1280×800 PNGで配置し、src / altを登録。実画面であることと機密情報の除去を人間が確認。
-- [ ] 反映後に `python scripts/check-site.py --release` が成功。
+- [ ] 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` をmain / rootで配信し、HTTPSを確認。
+- [ ] siteUrlのhostname / pathname、4ページのcanonical / og:url、404のbase pathを確認。
+- [ ] supportEmail `raydevsupport@gmail.com` の実受信・返信、supportSubjectの `[GridPorter]` を確認。
+- [ ] PrivacyでExtensionデータと任意の問い合わせを分離し、ContactSupporterの実運用と照合。
+- [ ] Termsの運営主体・準拠法・裁判管轄等を人間が最終確認。
+- [ ] Supportの案内・秘密情報送付禁止・自動整理と手動返信を人間が最終確認。
+- [ ] 最終確認後だけprivacyReviewed / termsReviewed / supportReviewedをtrueにする。
+- [ ] `node scripts/sync-metadata.mjs` 後に `python scripts/check-site.py --release` を実行。
 
-release検査は正式HTTPS URL・メール書式・確認フラグ・実PNGの存在と寸法・静的canonical / OGを検査し、条件が揃うと正式URLの4ページへHTTPSアクセスして応答・最終URL・配信されたcanonical / og:urlも確認します。実画像未登録時は画像不足を報告し、登録後はog:imageも必須です。メールの実在・受信、画像の真実性、法的な最終確認は人間の確認が必要です。独自ドメイン不足を理由にβ公開を止めません。将来の独自ドメイン移行時にはDNS管理権限とHTTPSも確認してください。
+現在の確認フラグはfalseです。サイトのrelease検査はこの3項目で停止するのが正しい状態です。画像未登録だけを理由に失敗せず、CWS提出可否を断定しません。任意のサイト掲載画像を登録した場合は、実ファイル・1280×800 PNG・alt・og:imageを検査します。架空画像は追加しません。
 
-## 最後の実確認
+設定と確認フラグが揃うと、正式URLの4ページへHTTPSアクセスし、応答・最終URL・公開canonical / og:urlも検査します。メール実受信・法的確認・画像の真実性は人間の確認が必要です。
 
-- [ ] Store申告・掲載説明・拡張UI・Privacyのデータ取扱いが一致。
-- [ ] Free 2,000行 / Recipe 1、Pro beta 20,000行 / Recipe件数制限なし、機能表が実装と一致。
-- [ ] 有料販売・AI・Cloud・未実装ライセンス等の誤認がない。
-- [ ] 内部リンク、Storeリンク（発行済みの場合）、問い合わせ窓口、深い404、綴りを確認。
-- [ ] PC / mobile、キーボード、visible focus、FAQ、JS無効時の本文、画像alt、contrastを確認。
-- [ ] 不要な第三者リクエスト・解析・広告・Cookie・フォームがない。
-- [ ] 秘密情報・個人連絡先・住所・認証資格情報・環境変数ファイルを含めない。
+## CWS提出資産・本体との整合（サイト検査とは別）
+
+- [ ] 本体PR #3のURLとレビュー日を参照し、reviewed snapshotで確認した0.4.2 manifestをMerge後の固定commit・実配布ビルドと最終照合。CWS再提出は人間が実施する。
+- [ ] StoreのWeb browsing history / Website content等の申告、Listing、拡張UI、Privacyを最終照合。任意のサポートメールをExtensionの収集カテゴリと混同しない。
+- [ ] CWS提出用の実スクリーンショットを用意し、提出要件・機密情報・権利を確認。サイトRepositoryへのcommitは不要。
+- [ ] Store URLが発行されたら設定し、配布状態・β表示を確認。
+- [ ] Free 2,000行 / Recipe 1、Pro beta 20,000行 / Recipe件数制限なし、機能表を確認。
+- [ ] 本体のWebデータを外部AIサービスへ送信しない説明と、任意のサポートでローカルAIを使う説明を区別。
+- [ ] 有料販売・AI搭載製品・未実装ライセンス等の誤認がない。
+
+## 表示・セキュリティと運用
+
+- [ ] PC / mobile、キーボード、visible focus、FAQ、JS無効時の本文、内部リンク・深い404を確認。
+- [ ] 問い合わせ本文を収集・保存するフォーム、解析、追跡、外部JS・フォント、広告、Cookieがない。
+- [ ] Gmail原文・添付・下書きの自動削除は未実装として案内。Drive処理済みコピー原則7日・failed原則30日は適用範囲と清掃遅延を含めて説明。
+- [ ] 件名prefixによる受付範囲、Drive非共有設定、ローカルAI、手動送信、通知の最小化を実際の運用で確認。
+- [ ] 秘密情報・私用の連絡情報・住所・認証資格情報をcommitしない。
 
 検査成功は審査通過や法的適合の保証ではありません。
