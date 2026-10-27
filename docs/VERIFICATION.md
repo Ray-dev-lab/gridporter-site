@@ -2,11 +2,13 @@
 
 更新確認日：2026年10月27日（日本時間）。サイト対象：GridPorter 0.4.2 beta。
 
-## 今回の参照と実装との差異
+## 今回のPR head参照（GitHubから再取得）
 
-Extension mainは `2f53139bcb348af34b84547be6caf3fe98fd49fd`、提出準備branchは `dc462c4707ae18095ade6715243afb692c4c4dfa`。取得時点ではいずれも0.4.1表記です。サイトの現行表記は依頼された0.4.2 betaへ同期し、未確認の0.4.2配布物を確認済みとは扱いません。
+GridPorter [PR #3](https://github.com/Ray-dev-lab/gridporter/pull/3)の現在headは `3ece341c09228215849f3455d4e5237013ac7c7d`、baseはmain / `2f53139bcb348af34b84547be6caf3fe98fd49fd`。現在のGitHubからPR本文・15変更ファイルとhead refを取得し、manifestのGridPorter BETA / 0.4.2 / β宣言、4権限のみ・host permissionなし・CSP、runtime src差分なしとRemote Code追加なしを読取り確認しました。以前の提出準備時点のversionは現行PRの根拠にしません。
 
-ContactSupporterはdefault branch `codex/initial-implementation`、`babf97e9f70505bc56c54c1d05dd84e67db2f0e5` を読み取り確認。実運用とprefix受付・保持期限の適用範囲は [SUPPORT_PRIVACY_REVIEW](SUPPORT_PRIVACY_REVIEW.md) を参照してください。
+ContactSupporter [PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)の現在headは `f5ea35fe98f262a0f954194fd2a17584b75846cc`、baseはcodex/initial-implementation / `babf97e9f70505bc56c54c1d05dd84e67db2f0e5`。PR本文・23変更ファイルとhead refを取得し、prefixのfail-closed gate、DATA_HANDLING、保持・添付・通知・下書き処理を読取り確認。prefix不一致ではfull body / queue / LINE / supportラベル変更 / state作成なしです。詳細は [SUPPORT_PRIVACY_REVIEW](SUPPORT_PRIVACY_REVIEW.md) を参照してください。
+
+両PRとも取得時点でopen / 未Merge。ContactSupporterの本番設定・受入試験、GridPorterのCWS再提出は未完了として扱います。サイトの公開反映済みとも記載しません。外部PRの試験成績はPR本文の報告であり、このサイト作業で全ビルド・実サービス試験を再実行したという意味ではありません。
 
 ## 過去の本体参照（2026年10月26日、履歴根拠）
 
@@ -40,7 +42,7 @@ ContactSupporterはdefault branch `codex/initial-implementation`、`babf97e9f705
 - URLゲートでは指定のGitHub Pages hostname / pathnameだけをβサイトとして許可し、将来の独自ドメイン対応を維持。HTTP、ローカル・予約ドメイン、IPアドレス、認証情報、query / hash、別のGitHub Pagesのhostname / pathnameは拒否。
 - 隔離した一時fixtureでURLゲート28ケースを確認。正式β URL・将来の独自ドメインを許可し、別のGitHub Pages、パス違い、予約ドメイン、認証情報、空を含むquery / hash、明示port等を拒否。テスト用宛先は公開ファイルに保存しない。
 - 現在の実設定で `--release` は最終確認フラグ3件の不足により失敗する。サイト掲載画像は任意で、未登録だけでは失敗しない。GitHub Pagesであることや独自ドメイン不足を理由には失敗しない。実画像のog:imageは登録後に検査する。
-- 4ページの変更はcanonical / og:urlの同期のみで、本文・デザイン・CSPは維持。404は変更前と同一で、base pathは `/gridporter-site/`。通常site checkと指定のNode構文検査3件に合格。
+- 過去のGitHub Pages URL同期時の4ページ変更はcanonical / og:urlのみ。今回のcross-repository evidence同期でもデザイン・CSP・404のbase path `/gridporter-site/` は維持。
 - source全体の旧ブランド残存検索は0件。確認用の不要な文言や移行記録を公開ファイルに残さない。
 - CIはPR / main pushで静的検査、JS構文検査、mailto安全性・releaseゲートの回帰検査を行う。checkoutはcommit固定・contents read・認証情報保持なし。
 
@@ -57,3 +59,9 @@ ContactSupporterはdefault branch `codex/initial-implementation`、`babf97e9f705
 - 通常site check・指定のNode構文検査3件が成功。実設定の`--release`はprivacyReviewed / termsReviewed / supportReviewedの3件で意図どおり停止。flagsはfalseを維持。
 - 2026年10月27日のlive確認：トップ・Privacy・Terms・SupportはいずれもHTTPSでHTTP 200、canonicalも正式β URLに一致。公開本文は0.4.1 betaのまま。PR未mergeのため今回の変更が公開済みとは扱わない。
 - CWS画像はExtensionの提出資産として別確認。サイトcommitや架空のog:imageを要求・追加しない。
+
+## 最新PR evidence再照合
+
+両実装PRの現在head・base・変更ファイル・本文・関連実装をGitHubから読み取り確認し、監査の現行根拠を上記headへ更新しました。古い提出準備のversion・prefix未確認という判断は現行根拠から除外しています。ContactSupporterのbase SHAはPRのbaseとしてのみ記載し、最新実装とは区別します。
+
+指定の通常site check、Node構文検査3件、Node 5テスト、Python 3テストを再実行して成功。実設定の`--release`は人間のreview flags 3件だけで意図どおり失敗。flagsはfalseのままで、Merge後のliveページを人間が最終確認する前にはtrueにしません。外部PRのMerge、本番prefix設定・受入試験、CWS最終checkbox・再提出は未完了です。
