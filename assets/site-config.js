@@ -3,6 +3,7 @@ window.GRIDPORTER_CONFIG = Object.freeze({
   siteUrl: 'https://ray-dev-lab.github.io/gridporter-site/',
   chromeWebStoreUrl: '',
   supportEmail: 'raydevsupport@gmail.com',
+  supportSubject: '[GridPorter] お問い合わせ',
   supportUrl: '',
   privacyUrl: 'privacy/',
   termsUrl: 'terms/',

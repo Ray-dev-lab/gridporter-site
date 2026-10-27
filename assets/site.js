@@ -13,10 +13,21 @@
       return url.href;
     } catch { return null; }
   }
+  function supportMailto() {
+    const email = config.supportEmail;
+    const subject = config.supportSubject ?? '';
+    const unsafeHeader = /[\u0000-\u001f\u007f]|%0[ad]/i;
+    if (typeof email !== 'string' || unsafeHeader.test(email) || !/^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) return null;
+    if (typeof subject !== 'string' || unsafeHeader.test(subject)) return null;
+    try {
+      const recipient = encodeURIComponent(email).replace(/%40/gi, '@');
+      return `mailto:${recipient}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
+    } catch { return null; }
+  }
   document.querySelectorAll('[data-config-link]').forEach(link => {
     const key = link.dataset.configLink;
     const href = key === 'supportEmail'
-      ? (typeof config[key] === 'string' && /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(config[key]) ? `mailto:${config[key]}` : null)
+      ? supportMailto()
       : safeUrl(config[key], key === 'chromeWebStoreUrl');
     if (!href) return;
     link.href = href;

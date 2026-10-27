@@ -1,22 +1,23 @@
 # 公開前に確定する情報
 
-対象：GridPorter 0.4.1 beta。現在は有料販売を行いません。
+対象：GridPorter 0.4.2 beta。現在は有料販売を行いません。
 
 - [ ] 正式βサイト `https://ray-dev-lab.github.io/gridporter-site/` のPages配信とHTTPSを確認。
-- [ ] `assets/site-config.js` のsiteUrlが上記URLと一致することを確認。GridPorter 0.4.1 betaではGitHub Pages標準URLを正式サイトとして使用し、独自ドメインは有料化・正式ブランド展開時に再検討する。
+- [ ] `assets/site-config.js` のsiteUrlが上記URLと一致することを確認。GridPorter 0.4.2 betaではGitHub Pages標準URLを正式サイトとして使用し、独自ドメインは有料化・正式ブランド展開時に再検討する。
 - [ ] 公開窓口のsupportEmailを設定し、実際の受信・返信を確認。個人用メールを推測して設定しない。
 - [ ] Publisher name / 運営主体と必要な表示情報を確定し、Privacy・Termsに反映。Git Authorから法的な運営主体を推測しない。
-- [ ] 問い合わせで受信した情報の保存先・保持期間・削除依頼・処理事業者等を確定しPrivacyへ反映。
-- [ ] 本体main・実配布ビルド・version・Free/Proを最終照合。参照時点は0.4.1 beta、Free 2,000行 / Recipe 1、Pro 20,000行 / Recipe件数制限なし。
+- [ ] 問い合わせ用Gmail・非共有Drive・運営者端末の実運用、保持・削除、外部通知の内容をPrivacyと照合。原文・添付・返信下書きには自動削除日数を設定したと記載しない。
+- [ ] 本体main・実配布ビルド・version・Free/Proを最終照合。サイト対象は0.4.2 beta。読み取り時点の本体mainは0.4.1表記のため、0.4.2の実配布物・対応コミットを提出前に再確認する。Free 2,000行 / Recipe 1、Pro 20,000行 / Recipe件数制限なし。
 - [ ] Dataset / Snapshot / Recipe / checkpoint / session / ローカル利用カウンターの保存先、保持、削除範囲を確認。
 - [ ] Local-first、元サイトへの通常通信、support bundleの明示共有をStore申告・掲載説明・拡張UIと一致させる。
 - [ ] Privacyを人間が確認してprivacyReviewedをtrueにする。
 - [ ] Termsの運営者・準拠法・裁判管轄・免責等を人間が確定してtermsReviewedをtrueにする。
 - [ ] Support窓口・対応方法・情報の共有範囲を確認してsupportReviewedをtrueにする。
-- [ ] 機密情報や第三者の権利を確認した実スクリーンショットを配置・登録。
+- [ ] CWS提出用実スクリーンショットを別途準備・確認する。サイトRepositoryへのcommitは必須ではない。サイトに掲載する場合のみ配置・登録。
 - [ ] 正式なChrome Web Store URLが発行されたら設定。未発行なら空のままでCTA非表示。
 - [ ] `node scripts/sync-metadata.mjs` でcanonical / OG / 404を反映し、公開ページで確認。
-- [ ] `python scripts/check-site.py --release` を実行し、CWS提出前の必須条件を満たす。
+- [ ] `python scripts/check-site.py --release` でサイトの公開準備を確認し、CWSの画像等の提出資産は別に確認する。
+- [ ] 件名先頭の `[GridPorter]` を実メールで確認。自動受付の対象範囲は運用中のContactSupporterと照合し、prefixなしでもメール受信自体を拒否するという案内にしない。
 
 siteUrlは正式βサイトのURL、supportEmailは `raydevsupport@gmail.com` を設定済みです。メールの受信・返信は別途確認してください。supportUrl、chromeWebStoreUrl、実画像は未設定です。Privacy / Terms / Supportの最終確認フラグはfalseです。架空情報は公開ページに表示しません。
 
