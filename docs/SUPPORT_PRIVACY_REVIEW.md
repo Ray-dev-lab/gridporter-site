@@ -2,16 +2,16 @@
 
 確認日：2026年10月27日。サイトの対象表記はGridPorter 0.4.2 beta。法的適合や実アカウントの設定を保証する記録ではありません。
 
-## 読み取り参照
+## 固定根拠と日付付きレビュー記録
 
-- [GridPorter PR #3](https://github.com/Ray-dev-lab/gridporter/pull/3)：head `3ece341c09228215849f3455d4e5237013ac7c7d`、branch `chore/cws-private-beta-submission`。baseはmain / `2f53139bcb348af34b84547be6caf3fe98fd49fd`。
-- [ContactSupporter PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)：head `f5ea35fe98f262a0f954194fd2a17584b75846cc`、branch `chore/gridporter-support-hardening`。baseはcodex/initial-implementation / `babf97e9f70505bc56c54c1d05dd84e67db2f0e5`。このbaseを現行PR実装の根拠にはしません。
-- 2026年10月27日に現在のGitHub APIで両PRのhead / base / 本文 / 変更一覧を確認し、PR refを取得して同じSHAのコードを読取り確認しました。GridPorterは15変更ファイル（package / manifest / icon / CWS・Privacy監査docs / tooling・E2E等）、ContactSupporterは23変更ファイル（Apps Script / redactor / repository制御 / DATA_HANDLING / 受入手順 / setup・検査・テスト等）。
-- 両PRともopen / 未Mergeです。以下はPR実装の確認であり、本番導入・live反映・受入試験・CWS再提出の完了を示しません。Merge、本番設定、受入試験は未完了として扱います。
+- ContactSupporterの固定根拠はMerge commit [`a10650cfc0c1625e0ac3b2273acd15ee1b373cf4`](https://github.com/Ray-dev-lab/contactsupporter/commit/a10650cfc0c1625e0ac3b2273acd15ee1b373cf4)です。2026年10月27日のGitHub読取りで[PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)のMerge完了と、このcommitがdefault branch `codex/initial-implementation` に含まれることを確認しました。
+- 固定permalink：[DATA_HANDLING.md](https://github.com/Ray-dev-lab/contactsupporter/blob/a10650cfc0c1625e0ac3b2273acd15ee1b373cf4/support-agent/docs/DATA_HANDLING.md)、[Code.gs](https://github.com/Ray-dev-lab/contactsupporter/blob/a10650cfc0c1625e0ac3b2273acd15ee1b373cf4/support-agent/apps-script/Code.gs)。取得したdefault branch上の両ファイルと同一内容であることを確認しました。private repositoryの根拠は閲覧権限を持つ運営者向けで、公開Privacyの利用者が読める前提にはしません。
+- GridPorterの主要参照は[PR #3](https://github.com/Ray-dev-lab/gridporter/pull/3)です。レビュー実施日：2026年10月27日。その時点の **reviewed snapshot** は `f68700c6718bf681b907849d4d11e46ab464297f`、baseはmain / `2f53139bcb348af34b84547be6caf3fe98fd49fd`。このSHAはレビュー対象の再現用であり、以後も変わらないPR先端やMerge済み実装を表すものではありません。
+- レビュー時点でGridPorter PR #3はopen / 未Mergeです。ContactSupporterのMerge完了は本番導入・受入試験完了を意味しません。本番設定・受入試験、サイトのlive反映、GridPorterのCWS再提出はこの確認だけでは完了扱いにしません。後続変更やMerge時には再照合します。
 
 ## GridPorter 0.4.2の確認
 
-最新headの `public/manifest.json` はname `GridPorter BETA`、version `0.4.2`、descriptionに `THIS EXTENSION IS FOR BETA TESTING` を含みます。permissionsはactiveTab / scripting / storage / downloadsの4件のみで、host_permissions / optional_host_permissionsはありません。CSPは `script-src 'self'; object-src 'none'`、runtime srcはPR baseから変更なし。Remote Code追加なしを、manifest / src差分 / `tests/tooling/resubmission.test.mjs` / `docs/RESUBMISSION_AUDIT_0.4.2.md` で読取り確認しました。外部PRの全ビルド・E2Eや配布ZIPの再検査をこのサイト作業で再実行したという意味ではありません。
+上記日付のreviewed snapshotで `public/manifest.json` のname `GridPorter BETA`、version `0.4.2`、descriptionの `THIS EXTENSION IS FOR BETA TESTING` を確認しました。permissionsはactiveTab / scripting / storage / downloadsの4件のみで、host_permissions / optional_host_permissionsはありません。CSPは `script-src 'self'; object-src 'none'`、runtime srcはレビュー時のPR baseから変更なし。Remote Code追加なしを、manifest / src差分 / `tests/tooling/resubmission.test.mjs` / `docs/RESUBMISSION_AUDIT_0.4.2.md` で読取り確認しました。これは当日のレビュー記録であり、後続のPR変更・最終配布物まで検証済みとするものではありません。外部PRの全ビルド・E2Eや配布ZIPの再検査をこのサイト作業で再実行したという意味でもありません。
 
 PR本文では既存の手入力報告文を端末内で処理・コピーする機能も説明されています。Extensionが問い合わせ本文を一切扱わないとは断言せず、メール受信・送信者情報取得・自動送信とは区別します。実配布ZIP・Dashboard申告・CWS再提出は人間が確認・実施します。
 
@@ -32,9 +32,9 @@ ExtensionのWebsite content / URL・title / Recipe / Dataset / Snapshot / checkp
 
 ## 保持期間の適用範囲
 
-最新PRの `support-agent/docs/DATA_HANDLING.md` 第10節とCode.gsのmaintenance_を照合しました。
+上記ContactSupporter Merge commitに固定した `support-agent/docs/DATA_HANDLING.md` 第10節とCode.gsのmaintenance_を照合しました。
 
-|保存物|PR実装で確認した扱い|
+|保存物|固定Merge commitで確認した扱い|
 |---|---|
 |archive内の処理済みresult / queue / receipt等payload|最終更新から7日超でDrive Trash対象（公開文では原則7日）|
 |failed内payload|最終更新から30日超でDrive Trash対象（公開文では原則30日）|
@@ -48,11 +48,11 @@ ExtensionのWebsite content / URL・title / Recipe / Dataset / Snapshot / checkp
 
 ## 件名prefixと実運用の確認
 
-サイトのmailtoには `[GridPorter] お問い合わせ` を設定します。**ContactSupporter PR #1の最新headでprefix限定のfail-closed gateを確認しました。** `SUPPORT_INTAKE_PREFIXES_JSON` のGridPorter設定値は `["[GridPorter]"]`。未設定・空・不正なら受付0件で、Inbox全体へのfallbackはありません。
+サイトのmailtoには `[GridPorter] お問い合わせ` を設定します。**上記ContactSupporter Merge commitでprefix限定のfail-closed gateを確認しました。** `SUPPORT_INTAKE_PREFIXES_JSON` のGridPorter設定値は `["[GridPorter]"]`。未設定・空・不正なら受付0件で、Inbox全体へのfallbackはありません。
 
 Code.gsのintakePrefixes_ / acceptedSubject_ / intake_で、候補をSubject metadataにより大小文字を含む先頭一致で検査してから後段へ進みます。不一致ではfull body取得・Drive queue作成・LINE通知・supportラベル変更・state作成を行いません。Re: / Fwd: / 先頭空白 / 本文だけのprefixは受付せず、Gmailに届いたメールは人が確認します。結果回収・エラー処理・滞留確認にも同じ境界があり、旧stateを通じた迂回を防ぐコードと契約テストを読み取り確認しました。prefixは本人確認・迷惑メール対策の代替ではありません。
 
-これはPR #1実装での確認です。Merge / 本番設定 / 受入試験は未完了。本番へ配置済みとは記載しません。公開ページには内部property名を出さず、製品識別子で始まる件名の案内を維持します。
+これはMerge済み固定commitでの確認です。本番設定 / 受入試験の完了は別途確認が必要で、本番へ配置済みとは記載しません。公開ページには内部property名を出さず、製品識別子で始まる件名の案内を維持します。
 
 Drive領域の非共有設定、Ollamaのcloud無効化、通知の宛先と内容、実メール受信・手動返信は実環境での確認が必要です。コードの読み取りだけで稼働中の構成を確認済みとは扱いません。
 

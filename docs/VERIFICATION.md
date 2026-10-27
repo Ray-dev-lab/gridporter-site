@@ -2,13 +2,13 @@
 
 更新確認日：2026年10月27日（日本時間）。サイト対象：GridPorter 0.4.2 beta。
 
-## 今回のPR head参照（GitHubから再取得）
+## 固定根拠とレビュー時点の記録（2026年10月27日）
 
-GridPorter [PR #3](https://github.com/Ray-dev-lab/gridporter/pull/3)の現在headは `3ece341c09228215849f3455d4e5237013ac7c7d`、baseはmain / `2f53139bcb348af34b84547be6caf3fe98fd49fd`。現在のGitHubからPR本文・15変更ファイルとhead refを取得し、manifestのGridPorter BETA / 0.4.2 / β宣言、4権限のみ・host permissionなし・CSP、runtime src差分なしとRemote Code追加なしを読取り確認しました。以前の提出準備時点のversionは現行PRの根拠にしません。
+GridPorterは[PR #3](https://github.com/Ray-dev-lab/gridporter/pull/3)を主要参照とします。レビュー実施日：2026年10月27日。**reviewed snapshot** `f68700c6718bf681b907849d4d11e46ab464297f`、base main / `2f53139bcb348af34b84547be6caf3fe98fd49fd` で、manifestのGridPorter BETA / 0.4.2 / β宣言、4権限のみ・host permissionなし・CSP、runtime src差分なしとRemote Code追加なしを読取り確認しました。このSHAは当日の検証対象を再現するための記録で、可変なPR先端の継続的な保証ではありません。レビュー時点でPRは未Mergeで、後続変更・Merge後の最終配布物は再照合が必要です。
 
-ContactSupporter [PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)の現在headは `f5ea35fe98f262a0f954194fd2a17584b75846cc`、baseはcodex/initial-implementation / `babf97e9f70505bc56c54c1d05dd84e67db2f0e5`。PR本文・23変更ファイルとhead refを取得し、prefixのfail-closed gate、DATA_HANDLING、保持・添付・通知・下書き処理を読取り確認。prefix不一致ではfull body / queue / LINE / supportラベル変更 / state作成なしです。詳細は [SUPPORT_PRIVACY_REVIEW](SUPPORT_PRIVACY_REVIEW.md) を参照してください。
+ContactSupporter [PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)はMerge済み。固定根拠はMerge commit [`a10650cfc0c1625e0ac3b2273acd15ee1b373cf4`](https://github.com/Ray-dev-lab/contactsupporter/commit/a10650cfc0c1625e0ac3b2273acd15ee1b373cf4)です。default branch `codex/initial-implementation` に含まれることと、固定commitのDATA_HANDLING / Code.gsが取得したdefault branch上の内容と一致することを確認しました。prefixのfail-closed gate、保持・添付・通知・下書き処理を読取り確認し、prefix不一致ではfull body / queue / LINE / supportラベル変更 / state作成なしです。固定permalinkは [SUPPORT_PRIVACY_REVIEW](SUPPORT_PRIVACY_REVIEW.md) を参照してください。
 
-両PRとも取得時点でopen / 未Merge。ContactSupporterの本番設定・受入試験、GridPorterのCWS再提出は未完了として扱います。サイトの公開反映済みとも記載しません。外部PRの試験成績はPR本文の報告であり、このサイト作業で全ビルド・実サービス試験を再実行したという意味ではありません。
+ContactSupporterのMerge完了と本番設定・受入試験は区別します。GridPorter PR #3はレビュー時点で未Merge。CWS再提出やサイトの公開反映も完了扱いにしません。外部PRの試験成績はPR本文の報告であり、このサイト作業で全ビルド・実サービス試験を再実行したという意味ではありません。
 
 ## 過去の本体参照（2026年10月26日、履歴根拠）
 
@@ -60,8 +60,8 @@ ContactSupporter [PR #1](https://github.com/Ray-dev-lab/contactsupporter/pull/1)
 - 2026年10月27日のlive確認：トップ・Privacy・Terms・SupportはいずれもHTTPSでHTTP 200、canonicalも正式β URLに一致。公開本文は0.4.1 betaのまま。PR未mergeのため今回の変更が公開済みとは扱わない。
 - CWS画像はExtensionの提出資産として別確認。サイトcommitや架空のog:imageを要求・追加しない。
 
-## 最新PR evidence再照合
+## 参照方法の最終整理
 
-両実装PRの現在head・base・変更ファイル・本文・関連実装をGitHubから読み取り確認し、監査の現行根拠を上記headへ更新しました。古い提出準備のversion・prefix未確認という判断は現行根拠から除外しています。ContactSupporterのbase SHAはPRのbaseとしてのみ記載し、最新実装とは区別します。
+ContactSupporterはdefault branchに含まれるMerge commitを固定根拠とし、DATA_HANDLING / Code.gsのpermalinkを使用します。GridPorterはPR URLを主要参照とし、SHAは日付付きreviewed snapshotと明示します。可変PRの先端を長期保証する文書にはせず、Merge後に固定commitと最終配布物を改めて照合します。今回の差分は文書のみで、Privacy / Supportの公開本文・デザイン・機能・設定は変更しません。
 
-指定の通常site check、Node構文検査3件、Node 5テスト、Python 3テストを再実行して成功。実設定の`--release`は人間のreview flags 3件だけで意図どおり失敗。flagsはfalseのままで、Merge後のliveページを人間が最終確認する前にはtrueにしません。外部PRのMerge、本番prefix設定・受入試験、CWS最終checkbox・再提出は未完了です。
+指定の通常site check、Node構文検査3件、Node 5テスト、Python 3テストを再実行して成功。実設定の`--release`は人間のreview flags 3件だけで意図どおり失敗。flagsはfalseのままで、Merge後のliveページを人間が最終確認する前にはtrueにしません。GridPorter PRのMerge、本番prefix設定・受入試験、CWS最終checkbox・再提出は別途確認が必要です。Data UsageのON / OFFは候補のままで、人間が最終Dashboard質問文と最終配布物から決定します。

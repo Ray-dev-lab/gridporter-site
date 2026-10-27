@@ -30,7 +30,7 @@ PR / main pushで実行します。メールリンクの入力検証・件名エ
 
 ## CWS提出資産・本体との整合（サイト検査とは別）
 
-- [ ] 本体PR #3最新headで読取り確認した0.4.2 manifest・参照commitを、Merge後の実配布ビルドと最終照合。CWS再提出は人間が実施する。
+- [ ] 本体PR #3のURLとレビュー日を参照し、reviewed snapshotで確認した0.4.2 manifestをMerge後の固定commit・実配布ビルドと最終照合。CWS再提出は人間が実施する。
 - [ ] StoreのWeb browsing history / Website content等の申告、Listing、拡張UI、Privacyを最終照合。任意のサポートメールをExtensionの収集カテゴリと混同しない。
 - [ ] CWS提出用の実スクリーンショットを用意し、提出要件・機密情報・権利を確認。サイトRepositoryへのcommitは不要。
 - [ ] Store URLが発行されたら設定し、配布状態・β表示を確認。

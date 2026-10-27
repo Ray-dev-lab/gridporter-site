@@ -80,7 +80,7 @@ GitHub Pagesの[branch公開](https://docs.github.com/en/pages/getting-started-w
 
 ## 本体・Privacy・Termsとの同期
 
-対象：**GridPorter 0.4.2 beta**。本体PRの最新head参照とMerge・実配布の確認状況は [VERIFICATION](docs/VERIFICATION.md) に記録します。Freeは2,000行・Recipe 1件、Pro betaは20,000行・Recipe件数制限なしです。取得件数や任意サイトでの精度を保証する上限ではありません。
+対象：**GridPorter 0.4.2 beta**。本体PRのレビュー記録とMerge・実配布の確認状況は [VERIFICATION](docs/VERIFICATION.md) に記録します。Freeは2,000行・Recipe 1件、Pro betaは20,000行・Recipe件数制限なしです。取得件数や任意サイトでの精度を保証する上限ではありません。
 
 保存先・保存期間・削除範囲・元サイトへの通常通信・support bundleを、公開説明、実際に配布する拡張機能、Store申告の間で照合します。法的適合・審査通過を断定せず、運営主体、受信した問い合わせの保持・削除条件、準拠法・裁判管轄は人間が確定します。
 
