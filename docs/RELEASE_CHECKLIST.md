@@ -22,7 +22,7 @@ PR / main pushで実行します。5種類の固定本文・正確な件名prefi
 - [ ] PCとスマートフォンの普段使うメールアプリで確認。起動しない・本文が省略される場合は、表示された宛先と件名形式で手動作成できること。
 - [ ] JavaScript無効でもSupportに宛先と件名形式が表示されること。supportEmail変更時は既存の `node scripts/sync-metadata.mjs` で静的表示も同期する。
 - [ ] PrivacyでExtensionデータと任意の問い合わせを分離し、ContactSupporterの実運用と照合。
-- [ ] Termsの運営主体・準拠法・裁判管轄等を人間が最終確認。
+- [ ] Termsでは運営者が未定義で、準拠法・裁判管轄の明文はない。実際の運営主体の公開表記と、法的記述の要否・内容、免責/責任範囲・β提供条件を所有者が判断する。架空の氏名・住所・法人・法域は補わない。
 - [ ] Supportの案内・秘密情報送付禁止・自動整理と手動返信を人間が最終確認。
 - [ ] 最終確認後だけprivacyReviewed / termsReviewed / supportReviewedをtrueにする。
 - [ ] `node scripts/sync-metadata.mjs` 後に `python scripts/check-site.py --release` を実行。
@@ -33,7 +33,7 @@ PR / main pushで実行します。5種類の固定本文・正確な件名prefi
 
 ## CWS提出資産・本体との整合（サイト検査とは別）
 
-- [ ] 本体PR #3のURLとレビュー日を参照し、reviewed snapshotで確認した0.4.2 manifestをMerge後の固定commit・実配布ビルドと最終照合。CWS再提出は人間が実施する。
+- [ ] 本体mainの固定参照 `dbcd4058fa12de3ef6195519fbef694e31a73646` で確認した0.4.2 manifestを最終配布ビルドと照合。CWS再提出は人間が実施する。
 - [ ] StoreのWeb browsing history / Website content等の申告、Listing、拡張UI、Privacyを最終照合。任意のサポートメールをExtensionの収集カテゴリと混同しない。
 - [ ] CWS提出用の実スクリーンショットを用意し、提出要件・機密情報・権利を確認。サイトRepositoryへのcommitは不要。
 - [ ] Store URLが発行されたら設定し、配布状態・β表示を確認。
@@ -47,6 +47,9 @@ PR / main pushで実行します。5種類の固定本文・正確な件名prefi
 - [ ] 問い合わせ本文を収集・保存するフォーム、解析、追跡、外部JS・フォント、広告、Cookieがない。
 - [ ] 固定の本文ひな形と、利用者がメールアプリ内で記入する実本文を区別。サイト側は実本文・ページURL・ブラウザー情報等を自動取得しない。PrivacyのExtension / Support分離と矛盾しない。
 - [ ] Gmail原文・添付・下書きの自動削除は未実装として案内。Drive処理済みコピー原則7日・failed原則30日は適用範囲と清掃遅延を含めて説明。
+- [ ] ContactSupporterのマージ済みPR #3 / #4との[対応表](SUPPORT_PRIVACY_REVIEW.md)を確認。LINEへ製品名・タイトル・AI概要（240文字）・元件名（180文字）・判定/調査/対応/draft状態・Ticket等が送られ、完全匿名化ではないことを公開Privacyと実運用で照合。
+- [ ] state / 通知再試行記録には短い概要・件名が含まれ、自動削除期限がなく、7日/30日のpayload清掃対象とは別であることを確認。LINE側・管理環境・端末・通知履歴の保持と閲覧範囲も確認する。
+- [ ] 上流DATA_HANDLING第0・10節の「本文なし」総称は新しいstate等の保持を十分に表さないため、所有者が見直す。サイト側の公開説明は実装と同文書第4節・通知仕様に合わせる。
 - [ ] 件名prefixによる受付範囲、Drive非共有設定、ローカルAI、手動送信、通知の最小化を実際の運用で確認。
 - [ ] 秘密情報・私用の連絡情報・住所・認証資格情報をcommitしない。
 
