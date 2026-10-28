@@ -11,6 +11,6 @@ window.GRIDPORTER_CONFIG = Object.freeze({
   release: {
     privacyReviewed: false,
     termsReviewed: false,
-    supportReviewed: false,
+    supportReviewed: true,
   },
 });

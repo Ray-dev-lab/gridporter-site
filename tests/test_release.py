@@ -3,6 +3,7 @@ from pathlib import Path
 from contextlib import redirect_stdout
 from unittest.mock import patch
 import io
+import re
 import runpy
 import shutil
 import subprocess
@@ -24,6 +25,11 @@ class ReleaseGateTests(unittest.TestCase):
             shutil.copytree(ROOT / folder, self.root / folder)
         for name in ('index.html', '404.html', '.nojekyll'):
             shutil.copy2(ROOT / name, self.root / name)
+        # Fixtures start unreviewed regardless of the real owner's approval state.
+        config = self.root / 'assets/site-config.js'
+        text = re.sub(r'((?:privacyReviewed|termsReviewed|supportReviewed)\s*:\s*)(?:true|false)',
+                      r'\g<1>false', config.read_text(encoding='utf-8'))
+        config.write_text(text, encoding='utf-8')
 
     def run_gate(self, reviewed=False):
         if reviewed:
@@ -68,6 +74,16 @@ class ReleaseGateTests(unittest.TestCase):
         code, output = self.run_gate(reviewed=True)
         self.assertEqual(code, 0, output)
         self.assertIn('PASS:', output)
+
+    def test_support_review_does_not_approve_privacy_or_terms(self):
+        config = self.root / 'assets/site-config.js'
+        config.write_text(config.read_text(encoding='utf-8').replace('supportReviewed: false', 'supportReviewed: true'), encoding='utf-8')
+        code, output = self.run_gate()
+        self.assertEqual(code, 1)
+        self.assertEqual(len(output.strip().splitlines()), 2, output)
+        self.assertIn('privacyReviewed', output)
+        self.assertIn('termsReviewed', output)
+        self.assertNotIn('supportReviewed', output)
 
     def test_registered_but_missing_site_image_still_fails(self):
         config = self.root / 'assets/site-config.js'
