@@ -30,4 +30,8 @@ const notFoundPath = resolve(root, '404.html');
 const notFound = await readFile(notFoundPath, 'utf8');
 const sitePath = base ? base.pathname : '/gridporter-site/';
 await writeFile(notFoundPath, notFound.replace(/(href=")[^"]*(assets\/(?:style\.css|favicon\.svg))"/g, `$1${sitePath}$2"`).replace(/href="[^"]*">トップページへ戻る/, `href="${sitePath}">トップページへ戻る`));
+// Static text fallback for disabled JavaScript or an unavailable mail application.
+const supportPath = resolve(root, 'support/index.html');
+const support = await readFile(supportPath, 'utf8');
+await writeFile(supportPath, support.replace(/(?<=<span data-support-email-fallback>)[\s\S]*?(?=<\/span>)/, () => escape(config.supportEmail || '')));
 console.log(base ? 'canonical / og:url / 404を更新しました。' : '正式URL未設定: canonical / og:urlを出力しません。');

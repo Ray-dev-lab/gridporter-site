@@ -5,6 +5,7 @@ from unittest.mock import patch
 import io
 import runpy
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -75,6 +76,15 @@ class ReleaseGateTests(unittest.TestCase):
         code, output = self.run_gate(reviewed=True)
         self.assertEqual(code, 1)
         self.assertIn('missing.png', output)
+
+    def test_metadata_sync_keeps_static_support_address_in_sync_with_config(self):
+        config = self.root / 'assets/site-config.js'
+        text = config.read_text(encoding='utf-8').replace("supportEmail: 'raydevsupport@gmail.com'", "supportEmail: 'help&desk@support.test'")
+        config.write_text(text, encoding='utf-8')
+        result = subprocess.run(['node', str(self.root / 'scripts/sync-metadata.mjs')], capture_output=True, check=False)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        html = (self.root / 'support/index.html').read_text(encoding='utf-8')
+        self.assertIn('<span data-support-email-fallback>help&amp;desk@support.test</span>', html)
 
 
 if __name__ == '__main__':
