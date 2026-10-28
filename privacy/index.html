@@ -32,6 +32,7 @@
 <h2 id="data">2. A. Extensionが取り扱う情報と保存目的</h2><p>利用者の操作に応じ、次の情報をブラウザー内で処理します。選択したページの情報には個人情報や業務上の機密情報が含まれる場合があります。</p><div class="table-scroll" role="region" aria-label="取り扱う情報の一覧。横にスクロールできます" tabindex="0"><table class="data-table"><thead><tr><th scope="col">情報</th><th scope="col">内容と利用目的</th><th scope="col">保存場所</th></tr></thead><tbody>
 <tr><td>Website content</td><td>選択した表・一覧の文字、リンク・画像URLと代替文字、一部非機密フォームの現在値。取得・編集・出力に使用。画像本体は収集しません。</td><td>処理中のメモリー、Dataset</td></tr>
 <tr><td>URL・タイトル</td><td>取得元の識別、ページ送り、Recipeの再利用、任意の取得情報シートに使用。</td><td>Dataset、Recipeなどの関連データ</td></tr>
+<tr><td>手入力の報告文</td><td>Extension内で利用者が入力した報告内容・種類、任意で入力したURL。端末内で報告文を作成し、明示操作でコピーします。自動送信しません。</td><td>入力中の画面のメモリー。コピー後は端末のクリップボードにも残る場合があり、利用者自身で管理します。</td></tr>
 <tr><td>Recipe</td><td>対象URL、取得箇所、列・整形設定、取得条件の修復に使う列名や見出し等。繰り返し作業に使用。</td><td>ブラウザー内の拡張機能用保存領域</td></tr>
 <tr><td>Dataset</td><td>取得行・列、編集前の元データなど。プレビュー・編集・出力に使用。</td><td>ブラウザー内のデータ保存領域。保存しない設定ではセッション中の一時領域</td></tr>
 <tr><td>Snapshot</td><td>比較に必要な列ID・列名と値などを明示保存。前回結果との比較・差分出力に使用。</td><td>ブラウザー内のデータ保存領域</td></tr>

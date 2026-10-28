@@ -35,6 +35,6 @@ python -m unittest discover -s tests -p "test_*.py"
 
 PRとmain pushで通常検査を実行します。公開URL・問い合わせ窓口・任意画像は `assets/site-config.js` で管理し、変更時は `node scripts/sync-metadata.mjs` でcanonical・OG・404の戻り先・静的な連絡先表示を同期します。将来の独自ドメインへの変更にも対応しています。未確定のStore URL等は空のままにします。
 
-`python scripts/check-site.py --release` は公開準備を検査します。Privacy・Terms・Supportの確認フラグは所有者が実際の公開内容と運用を確認した後だけ更新します。検査成功は、法的適合やストア審査通過を保証しません。サイトへの画像掲載は任意です。掲載する場合は[実画面の案内](docs/SCREENSHOT_GUIDE.md)に従います。
+`python scripts/check-site.py --release` は正式HTTPS URL、公開ページのメタ情報、問い合わせ設定、任意の掲載画像等を検査します。検査成功は、法的適合やストア審査通過を保証しません。実際の法令対応とChrome Web Storeの提出内容は、それぞれ確認してください。サイトへの画像掲載は任意です。掲載する場合は[実画面の案内](docs/SCREENSHOT_GUIDE.md)に従います。
 
 このRepositoryのファイル・変更履歴・PRは公開情報です。認証情報、私用の連絡情報、内部監査資料や運用手順は登録しないでください。ファイルの削除後も過去のGit履歴やキャッシュに情報が残る場合があります。

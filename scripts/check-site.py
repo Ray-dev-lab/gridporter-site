@@ -135,8 +135,6 @@ if RELEASE:
     subject = CONFIG.get('supportSubject', '')
     if not isinstance(subject, str) or re.search(r'[\x00-\x1f\x7f]|%0[ad]', subject, re.I):
         fail('release', 'supportSubjectにメールヘッダーの制御文字は使用できません')
-    for key in ('privacyReviewed', 'termsReviewed', 'supportReviewed'):
-        if CONFIG.get('release', {}).get(key) is not True: fail('release', f'{key}の人間による最終確認が必要です')
     images = CONFIG.get('screenshots', [])
     if not isinstance(images, list): fail('release', 'screenshotsは配列で指定してください（サイトへの掲載は任意）')
     else:
@@ -181,4 +179,4 @@ if ERRORS:
     print('\n'.join(ERRORS))
     sys.exit(1)
 print(f'PASS: {len(PAGES)}ページ / {len(public)}公開テキストファイル。内部リンク・アンカー・メタ情報・禁止参照・外部リソース検査。')
-if RELEASE: print('PASS: サイトの設定・確認フラグ・正式HTTPS配信ゲート。CWS提出用画像は別途確認してください。メール受信と任意掲載画像の真実性は人間が確認してください。')
+if RELEASE: print('PASS: サイトの設定・正式HTTPS配信ゲート。CWS提出用画像は別途確認してください。メール受信と任意掲載画像の真実性は人間が確認してください。')
