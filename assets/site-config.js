@@ -8,9 +8,4 @@ window.GRIDPORTER_CONFIG = Object.freeze({
   privacyUrl: 'privacy/',
   termsUrl: 'terms/',
   screenshots: [],
-  release: {
-    privacyReviewed: false,
-    termsReviewed: false,
-    supportReviewed: true,
-  },
 });
