@@ -15,7 +15,7 @@ function run(overrides = {}, key = 'supportFormUrl', pageUrl = 'https://ray-dev-
     querySelectorAll:()=>[link],querySelector:selector=>selector==='[data-support-form-status]'?status:null,
   }};
   vm.runInNewContext(configScript, context);
-  context.window.GRIDPORTER_CONFIG={...context.window.GRIDPORTER_CONFIG,...overrides};
+  context.window.GRIDPORTER_CONFIG={...context.window.GRIDPORTER_CONFIG,supportFormUrl:'',...overrides};
   vm.runInNewContext(siteScript,context);
   return {link,status};
 }
