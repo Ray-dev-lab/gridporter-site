@@ -37,10 +37,13 @@ class Document(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.file, self.ids, self.links, self.metas = file, set(), [], {}
         self.canonicals = []
+        self.support_forms, self.form_statuses = [], []
         self.title, self.main, self.lang, self.favicon = False, False, False, False
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        if tag == 'a' and a.get('data-config-link') == 'supportFormUrl': self.support_forms.append(a)
+        if 'data-support-form-status' in a: self.form_statuses.append(a)
         if 'id' in a:
             if a['id'] in self.ids:
                 fail(self.file, f'重複ID: {a["id"]}')
@@ -81,7 +84,7 @@ for name in PAGES:
 for name, doc in docs.items():
     for tag, key, url in doc.links:
         parsed = urlsplit(url)
-        if parsed.scheme in ('https', 'mailto'): continue
+        if parsed.scheme == 'https': continue
         if parsed.scheme or parsed.netloc:
             fail(name, f'禁止URL形式: {url}')
             continue
@@ -116,6 +119,23 @@ for path in public:
         fail(path.relative_to(ROOT), '外部通信・外部CSS参照')
 if not (ROOT / '.nojekyll').exists(): fail('.nojekyll', 'ファイルなし')
 
+form_value = CONFIG.get('supportFormUrl', '')
+form_valid = isinstance(form_value, str) and len(form_value) <= 2048 and re.fullmatch(
+    r'https://(?:forms\.gle/[A-Za-z0-9_-]+|docs\.google\.com/forms/d/(?:e/)?[A-Za-z0-9_-]+/viewform)', form_value) is not None
+if form_value != '' and not form_valid:
+    fail('assets/site-config.js', 'supportFormUrlはGoogleフォームの回答用HTTPS URLを指定してください')
+support_doc = docs.get('support/index.html')
+form_links = support_doc.support_forms if support_doc else []
+form_statuses = support_doc.form_statuses if support_doc else []
+expected_form = (len(form_links) == 1 and len(form_statuses) == 1 and
+    ((form_valid and form_links[0].get('href') == form_value and 'hidden' not in form_links[0] and 'hidden' in form_statuses[0]) or
+     (form_value == '' and 'href' not in form_links[0] and 'hidden' in form_links[0] and 'hidden' not in form_statuses[0])))
+if not expected_form:
+    fail('support/index.html', 'supportFormUrlの静的リンクを同期してください（node scripts/sync-metadata.mjs）')
+for path in public:
+    if re.search(r'(?i)mail' + r'to:', path.read_text(encoding='utf-8')):
+        fail(path.relative_to(ROOT), 'メールソフトを起動するリンクは禁止です')
+
 if RELEASE:
     host = BASE.hostname or ''
     github_pages = host == 'github.io' or host.endswith('.github.io')
@@ -132,9 +152,7 @@ if RELEASE:
     email = CONFIG.get('supportEmail', '')
     if not isinstance(email, str) or re.search(r'[\x00-\x1f\x7f]|%0[ad]', email, re.I) or not re.fullmatch(r"[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", email):
         fail('release', '実際に受信できるsupportEmailが必要です')
-    subject = CONFIG.get('supportSubject', '')
-    if not isinstance(subject, str) or re.search(r'[\x00-\x1f\x7f]|%0[ad]', subject, re.I):
-        fail('release', 'supportSubjectにメールヘッダーの制御文字は使用できません')
+    if not form_valid: fail('release', '正式なsupportFormUrlが未設定です')
     images = CONFIG.get('screenshots', [])
     if not isinstance(images, list): fail('release', 'screenshotsは配列で指定してください（サイトへの掲載は任意）')
     else:

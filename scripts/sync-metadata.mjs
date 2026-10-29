@@ -13,6 +13,10 @@ if (config.siteUrl) {
   if (base.protocol !== 'https:' || base.username || base.password || base.search || base.hash) throw new Error('siteUrlは正式なHTTPS URLを指定してください');
   if (!base.pathname.endsWith('/')) base.pathname += '/';
 }
+const formValue = config.supportFormUrl;
+const formUrl = typeof formValue === 'string' && formValue.length <= 2048 && !/[\s\u0000-\u001f\u007f-\u009f]/.test(formValue) &&
+  /^https:\/\/(?:forms\.gle\/[A-Za-z0-9_-]+|docs\.google\.com\/forms\/d\/(?:e\/)?[A-Za-z0-9_-]+\/viewform)$/.test(formValue) ? formValue : '';
+if (formValue !== undefined && formValue !== '' && !formUrl) throw new Error('supportFormUrlはGoogleフォームの回答用HTTPS URLを指定してください');
 const firstImage = Array.isArray(config.screenshots) ? config.screenshots[0] : null;
 const image = base && firstImage && /^assets\/screenshots\/[a-z0-9-]+\.png$/.test(firstImage.src) && firstImage.alt ? firstImage : null;
 if (image) await readFile(resolve(root, image.src));
@@ -30,8 +34,15 @@ const notFoundPath = resolve(root, '404.html');
 const notFound = await readFile(notFoundPath, 'utf8');
 const sitePath = base ? base.pathname : '/gridporter-site/';
 await writeFile(notFoundPath, notFound.replace(/(href=")[^"]*(assets\/(?:style\.css|favicon\.svg))"/g, `$1${sitePath}$2"`).replace(/href="[^"]*">トップページへ戻る/, `href="${sitePath}">トップページへ戻る`));
-// Static text fallback for disabled JavaScript or an unavailable mail application.
+// Static form link and text fallback remain usable without JavaScript.
 const supportPath = resolve(root, 'support/index.html');
 const support = await readFile(supportPath, 'utf8');
-await writeFile(supportPath, support.replace(/(?<=<span data-support-email-fallback>)[\s\S]*?(?=<\/span>)/, () => escape(config.supportEmail || '')));
+const formMarkup = `
+<p data-support-form-status${formUrl ? ' hidden' : ''}>お問い合わせフォームは準備中です。フォームを利用できない場合は、下記の予備メール窓口をご利用ください。</p>
+<div class="actions"><a class="button secondary" data-config-link="supportFormUrl" target="_blank" rel="noopener noreferrer" aria-describedby="support-form-help"${formUrl ? ` href="${escape(formUrl)}"` : ' hidden'}>お問い合わせフォームを開く</a></div>
+`;
+if (!support.includes('<!-- support-form:start -->') || !support.includes('<!-- support-form:end -->')) throw new Error('Supportのフォーム同期領域がありません');
+await writeFile(supportPath, support
+  .replace(/(?<=<!-- support-form:start -->)[\s\S]*?(?=<!-- support-form:end -->)/, () => formMarkup)
+  .replace(/(?<=<span data-support-email-fallback>)[\s\S]*?(?=<\/span>)/, () => escape(config.supportEmail || '')));
 console.log(base ? 'canonical / og:url / 404を更新しました。' : '正式URL未設定: canonical / og:urlを出力しません。');
