@@ -26,7 +26,17 @@ class ReleaseGateTests(unittest.TestCase):
         for name in ('index.html', '404.html', '.nojekyll'):
             shutil.copy2(ROOT / name, self.root / name)
 
-    def run_gate(self, remote_url=None, remote_html=None, network_error=None):
+        result = self.configure_form('https://docs.google.com/forms/d/e/TestFormId/viewform')
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def configure_form(self, value):
+        config = self.root / 'assets/site-config.js'
+        import re
+        text = re.sub(r"supportFormUrl: '[^']*'", 'supportFormUrl: ' + repr(value), config.read_text(encoding='utf-8'))
+        config.write_text(text, encoding='utf-8')
+        return subprocess.run(['node', str(self.root / 'scripts/sync-metadata.mjs')], capture_output=True, check=False)
+
+    def run_gate(self, remote_url=None, remote_html=None, network_error=None, release=True):
         fixture = self.root
         self.requests = []
 
@@ -56,18 +66,61 @@ class ReleaseGateTests(unittest.TestCase):
 
         output = io.StringIO()
         code = 0
-        with patch('urllib.request.urlopen', side_effect=open_response), patch.object(sys, 'argv', ['check-site.py', '--release']), redirect_stdout(output):
+        with patch('urllib.request.urlopen', side_effect=open_response), patch.object(sys, 'argv', ['check-site.py', '--release'] if release else ['check-site.py']), redirect_stdout(output):
             try:
                 runpy.run_path(str(fixture / 'scripts/check-site.py'), run_name='__main__')
             except SystemExit as error:
                 code = error.code
         return code, output.getvalue()
 
-    def test_configuration_without_approval_settings_or_site_images_passes(self):
+    def test_configured_form_without_site_images_passes(self):
         code, output = self.run_gate()
         self.assertEqual(code, 0, output)
         self.assertIn('PASS:', output)
         self.assertEqual(self.requests, [BASE + suffix for suffix in ('', 'privacy/', 'terms/', 'support/')])
+
+    def test_missing_form_passes_normal_checks_but_blocks_release(self):
+        result = self.configure_form('')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.run_gate(release=False)[0], 0)
+        code, output = self.run_gate()
+        self.assertEqual(code, 1)
+        self.assertEqual(len(output.strip().splitlines()), 1, output)
+        self.assertIn('supportFormUrl', output)
+        self.assertEqual(self.requests, [])
+
+    def test_invalid_forms_are_rejected_by_sync_and_checker(self):
+        for url in ('http://forms.gle/TestFormId', 'https://forms.gle.evil.test/TestFormId',
+                    'https://docs.google.com/forms/d/TestFormId/edit',
+                    'https://forms.gle:443/TestFormId', 'https://forms.gle/TestFormId?entry.1=private'):
+            with self.subTest(url=url):
+                result = self.configure_form(url)
+                self.assertNotEqual(result.returncode, 0)
+                code, output = self.run_gate()
+                self.assertEqual(code, 1)
+                self.assertIn('supportFormUrl', output)
+
+    def test_sync_creates_a_static_form_link_and_restores_preparation_state(self):
+        for url in ('https://forms.gle/TestFormId', 'https://docs.google.com/forms/d/TestFormId/viewform'):
+            with self.subTest(url=url):
+                result = self.configure_form(url)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                html = (self.root / 'support/index.html').read_text(encoding='utf-8')
+                self.assertIn('href="' + url + '"', html)
+                self.assertIn('data-support-form-status hidden', html)
+                self.assertEqual(self.run_gate()[0], 0)
+        self.configure_form('')
+        html = (self.root / 'support/index.html').read_text(encoding='utf-8')
+        self.assertNotIn('href="https://forms.gle/', html)
+        self.assertIn('<p data-support-form-status>', html)
+
+    def test_stale_static_form_link_is_rejected(self):
+        config = self.root / 'assets/site-config.js'
+        config.write_text(config.read_text(encoding='utf-8').replace('TestFormId', 'ChangedFormId'), encoding='utf-8')
+        code, output = self.run_gate()
+        self.assertEqual(code, 1)
+        self.assertIn('静的リンク', output)
+        self.assertEqual(self.requests, [])
 
     def test_invalid_site_urls_are_rejected(self):
         config = self.root / 'assets/site-config.js'

@@ -24,7 +24,7 @@ jobs:
           node --check assets/site.js
           node --check assets/site-config.js
           node --check scripts/sync-metadata.mjs
-      - name: Check support mail link safety
+      - name: Check support form link safety
         run: node --test tests/site.test.cjs
       - name: Check site release gate without CWS assets
         run: python -m unittest discover -s tests -p "test_*.py"
