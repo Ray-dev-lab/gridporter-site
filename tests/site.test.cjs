@@ -62,3 +62,5 @@ test('support provides one external form entry, stable anchors and plain fallbac
  assert.match(html,/フォーム・メールのどちらから/);assert.match(html,/このメールアドレスから回答/);
  assert.doesNotMatch(html,/data-support-type|data-support-options|data-config-link="supportEmail"/);
 });
+
+test('PWA proposal separates planned sales, business files and support without active purchase links',()=>{const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),privacy=fs.readFileSync(path.join(root,'privacy/index.html'),'utf8'),terms=fs.readFileSync(path.join(root,'terms/index.html'),'utf8');for(const text of ['PWA','Founder','10万セル','一括承認','元ファイル','未販売'])assert.ok(home.includes(text),text);assert.doesNotMatch(home,/CHROME EXTENSION|Pro beta|0\.4\.2 beta/);assert.ok(privacy.includes('業務データをContactSupporterへ自動送信しません'));for(const text of ['Google','LINE','人間','7日','30日'])assert.ok(privacy.includes(text),text);assert.ok(terms.includes('価格、納品時期'));assert.equal((home.match(/data-config-link="chromeWebStoreUrl"/g)||[]).length,0);});
