@@ -64,3 +64,19 @@ test('support provides one external form entry, stable anchors and plain fallbac
 });
 
 test('PWA proposal separates planned sales, business files and support without active purchase links',()=>{const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),privacy=fs.readFileSync(path.join(root,'privacy/index.html'),'utf8'),terms=fs.readFileSync(path.join(root,'terms/index.html'),'utf8');for(const text of ['PWA','Founder','10万セル','一括承認','元ファイル','未販売'])assert.ok(home.includes(text),text);assert.doesNotMatch(home,/CHROME EXTENSION|Pro beta|0\.4\.2 beta/);assert.ok(privacy.includes('業務データをContactSupporterへ自動送信しません'));for(const text of ['Google','LINE','人間','7日','30日'])assert.ok(privacy.includes(text),text);assert.ok(terms.includes('価格、納品時期'));assert.equal((home.match(/data-config-link="chromeWebStoreUrl"/g)||[]).length,0);});
+
+test('current PWA metadata agrees with page content and keeps standard and OG descriptions aligned',()=>{
+ for(const name of ['index.html','terms/index.html','privacy/index.html','support/index.html']){
+  const html=fs.readFileSync(path.join(root,name),'utf8'),head=html.split('</head>')[0];
+  const title=head.match(/<title>([^<]+)<\/title>/)[1],ogTitle=head.match(/property="og:title" content="([^"]+)"/)[1];
+  const description=head.match(/name="description" content="([^"]+)"/)[1],ogDescription=head.match(/property="og:description" content="([^"]+)"/)[1];
+  assert.equal(title,ogTitle,name);assert.equal(description,ogDescription,name);assert.match(description,/PWA/,name);
+  assert.doesNotMatch(head,/Chrome拡張|β版|Free\s*\/\s*Pro|0\.4\.2/,name);
+  assert.match(html,/Free\s*\/\s*Founder/,name);
+ }
+ const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ assert.match(home,/<title>GridPorter \| 仕入価格改定を確認するPWA<\/title>/);
+ assert.match(home,/XLSX一括入力には対応していません/);
+ assert.match(home,/最大2,000行/);assert.match(home,/最大20,000行/);
+ assert.match(fs.readFileSync(path.join(root,'README.md'),'utf8'),/本体Phase 4\.5はmainへ統合済み/);
+});

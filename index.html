@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GridPorter | Webの表・一覧を、そのまま使えるExcelへ。</title>
+  <title>GridPorter | 仕入価格改定を確認するPWA</title>
   <meta name="description" content="仕入価格表や商品マスタを照合し、確認してXLSX・CSVへ出力するPWA。読み込んだ表を端末内で整形し、価格改定の判断資料と更新案を作成。未販売・公開準備中。">
   <meta name="theme-color" content="#17634b">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:site_name" content="GridPorter">
-  <meta property="og:title" content="GridPorter | Webの表・一覧を、そのまま使えるExcelへ。">
+  <meta property="og:title" content="GridPorter | 仕入価格改定を確認するPWA">
   <meta property="og:description" content="仕入価格表や商品マスタを照合し、確認してXLSX・CSVへ出力するPWA。読み込んだ表を端末内で整形し、価格改定の判断資料と更新案を作成。未販売・公開準備中。">
   <!-- site-metadata:start -->
   <link rel="canonical" href="https://ray-dev-lab.github.io/gridporter-site/">
@@ -30,7 +30,7 @@
 <main id="main" class="wrap"><section class="hero" id="how-it-works"><span class="kicker">LOCAL-FIRST PWA · 開発・受入準備中</span><h1>仕入価格の変更を確認し、<br>判断資料をExcelへ。</h1><p class="lead">前回と今回の仕入先価格表を照合し、異常・要確認を見て、必要な変更だけを更新案へまとめます。元ファイルや外部サービスを直接書き換えません。</p><p>現在は販売・一般公開前の検証段階です。アプリURLと購入条件は準備完了後に案内します。購入・起動リンクは未設置です。</p><a class="button secondary" href="#features">できることと制約を見る</a></section>
 <section id="features"><h2>毎月の価格改定確認を、一つの流れで</h2><ol><li>保存した業務を選び、今回・前回の価格表、または自社マスタと仕入先データを読み込みます。</li><li>キー・列対応・価格の税区分／単位・更新禁止列を確認します。曖昧な商品コードを勝手に一致させません。</li><li>値上げ・値下げ・新規・削除候補、重複・欠損などを確認します。BLOCKがあれば更新案は作れません。</li><li>候補を承認・保留・除外します。警告のない未判断候補は一覧を確認して一括承認でき、直前の一括操作のみ取り消せます。REVIEWの確認は迂回しません。</li><li>更新案CSV/XLSXと、全件の確認資料Excelを保存します。外部への反映は行いません。</li></ol><p>架空例：商品コード00123の仕入原価1,000円→1,500円を要確認として表示。00007の500円→450円も確認し、承認したセルだけを別の更新案へ出します。価格計算は条件が不明なら算出不可。粗利・総利益影響、自動値付け、EC専用取込CSVは未対応です。</p><p>警告がないことは正しさの保証ではなく、画面の確認は組織の正式決裁や法的監査ではありません。実務者による時短・購入価値や競合優位はまだ検証していません。</p></section>
 <section id="plans"><h2>Free / Founder</h2><div class="table-scroll" tabindex="0"><table class="data-table"><thead><tr><th>Free</th><th>Founder（未販売）</th></tr></thead><tbody><tr><td>単体CSV/TSV/HTML/XLSX、表貼付け、編集・Undo・日本語整形・診断、Excel/CSV・コピー、保存・バックアップ・復元</td><td>Freeの基本処理に加え、一括処理、Recipe、Snapshot比較・差分Excel、取引先別設定と月次価格／商品マスタ業務</td></tr><tr><td>最大2,000行</td><td>単体・結合最大20,000行。比較・XLSX入力・資料の個別制限あり</td></tr></tbody></table></div><p>Freeは無料での提供を予定。FounderはSTORESで買切り販売を検討していますが、価格・発行までの時間・サポート期間・更新条件は未確定です。販売開始と本番権利／配送の受入前に購入を受け付けません。</p><p>Founderは、購入後に案内する署名付きライセンスファイルをPWAへ読み込む方式を準備しています。再利用・復元には元のライセンスファイルの保管が必要です。開発用の切替を本番権利とは扱いません。</p></section>
-<section id="limits"><h2>読み込みと出力の上限</h2><p>MBは1,000,000 bytes。CSV/TSV/HTMLは元ファイル1件5MB、文字コード変換後UTF-8も5MB。各内部表JSONは8MB・200列。XLSXは元ZIP5MB、展開合計20MB・1資材8MB、全シート矩形10万セル、見出し込み5,001行、データ最大5,000行（Free2,000行）です。数式・結合セル・暗号化・旧XLSを拒否し、非表示行も含みます。完全なExcel表示の再現ではありません。</p><p>比較はmappingと追加税／単位列×新旧合計行数が10万セル以内、Recipe適用後の両入力JSONは20MB以内。確認資料はデータ部20万セル、追加シートJSON合計20MB、各表8MB。表／資料の事前見積には安全の余裕を含み、上限内でも停止する場合があります。完成ZIPのサイズとは異なります。20,000行が全ての列・資料で使える保証ではありません。</p></section>
+<section id="limits"><h2>読み込みと出力の上限</h2><p>XLSXは専用のExcel入力と月次価格・商品マスタ業務で読み込めます。従来の複数ファイル一括処理・取引先業務ツールのファイル入力はCSV/TSV/HTMLで、XLSX一括入力には対応していません。</p><p>MBは1,000,000 bytes。CSV/TSV/HTMLは元ファイル1件5MB、文字コード変換後UTF-8も5MB。各内部表JSONは8MB・200列。XLSXは元ZIP5MB、展開合計20MB・1資材8MB、全シート矩形10万セル、見出し込み5,001行、データ最大5,000行（Free2,000行）です。数式・結合セル・暗号化・旧XLSを拒否し、非表示行も含みます。完全なExcel表示の再現ではありません。</p><p>比較はmappingと追加税／単位列×新旧合計行数が10万セル以内、Recipe適用後の両入力JSONは20MB以内。確認資料はデータ部20万セル、追加シートJSON合計20MB、各表8MB。表／資料の事前見積には安全の余裕を含み、上限内でも停止する場合があります。完成ZIPのサイズとは異なります。20,000行が全ての列・資料で使える保証ではありません。</p></section>
 <section id="safety"><h2>データは端末内で処理</h2><p>読み込んだ業務ファイル・表・判断内容を解析サーバーや外部AIへ自動送信しません。明示保存したデータはブラウザー内、出力・バックアップは利用者の選んだ場所で管理します。サイトデータ削除や端末故障に備え、別の安全な場所へバックアップしてください。</p><p>PWAは別サイトのタブ・ログイン状態・DOMを自由に取得できません。旧Chrome拡張のページ検出、ページ送り、動的追加取得、Scrollとは異なり、ファイルと明示的なコピー＆貼付けが基本です。Chrome拡張版・Windowsアプリ版の開発／配布には戻りません。</p><p>業務データと、任意の問い合わせ・注文／ライセンス配送に必要な購入者情報は別に扱います。<a href="privacy/">データの取扱い</a>と<a href="terms/">利用条件</a>をご確認ください。</p></section>
 <section id="faq"><h2>困ったとき・使い続けるために</h2><p>BLOCKは解除して進めず、原因行・列を確認し、元ファイルの複製を修正して再取込してください。XLSXはシート・見出し行とエラー位置を確認します。実ファイルを送らずに相談できるよう、<a href="support/">サポート</a>の案内をご用意しています。</p><p>初回の資材取得後はオフラインの基本処理を利用できます。初回・更新取得には通信が必要です。更新前に保存とバックアップを行い、不調時にサイトデータを最初に消さないでください。実PWAインストール・実Excel・低メモリー環境の受入は準備中です。</p></section></main>
 <footer class="site-footer"><div class="wrap"><div class="footer-main"><a class="brand" href="./"><img src="./assets/favicon.svg" width="34" height="34" alt="">GridPorter</a>
