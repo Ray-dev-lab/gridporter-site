@@ -1,10 +1,12 @@
 # GridPorter 公式Webサイト
 
-**GridPorter（グリッドポーター）** — Webの表・一覧を、そのまま使えるExcelへ。
+**GridPorter（グリッドポーター）** — 仕入価格の変更を確認し、判断資料と更新案をExcelへ。
 
 [公式サイト](https://ray-dev-lab.github.io/gridporter-site/) · [プライバシーポリシー](https://ray-dev-lab.github.io/gridporter-site/privacy/) · [利用規約](https://ray-dev-lab.github.io/gridporter-site/terms/) · [サポート](https://ray-dev-lab.github.io/gridporter-site/support/)
 
-このブランチはPWA向けの公開前レビュー案です。FreeとFounder、月次価格改定確認、汎用表処理、形式別容量制限を現行実装に合わせます。未販売・PWA公開前で、購入URL・価格・発行時間・サポート／更新条件を確定しません。main／公開ページはこのPRのmerge前には変わりません。
+GridPorter PWAのFreeとFounder、月次価格改定確認、汎用表処理、形式別容量制限を案内する公式サイトです。
+
+GitHub Pages上での公式サイトの公開は、GridPorter PWA本体の一般公開・販売開始とは異なります。PWAは一般公開前・未販売で、実機受入は未完了です。購入・公開アプリURL、価格、ライセンス発行までの時間、サポート期間・更新条件は未確定です。
 
 ## このサイトについて
 
@@ -43,8 +45,8 @@ PRとmain pushで通常検査を実行します。公開URL・問い合わせ窓
 
 公開の回答者用URLだけを設定し、編集・管理URLや入力値付きURLは使用しません。フォームは外部の通常リンクで、業務データや問い合わせ文をサイトから自動送信しません。任意の問い合わせのGoogle・LINE・AI処理と手動返信、保存・削除の範囲はPrivacyの説明を保持します。
 
-## 履歴とレビュー範囲
+## 製品構成の履歴と提供状況
 
-旧版はChrome拡張0.4.2 beta／Free-Proの案内でした。現在仕様と混同しないよう、このPRでPWA／Free-Founderへ変更する案を提示します。履歴はGitに保持します。購入・公開アプリURL、販売価格・納品時間・サポート／更新条件は未確定で、架空リンクは設けません。
+旧版はChrome拡張0.4.2 beta／Free-Proの案内でした。現在の対象はPWA／Free-Founderで、旧版の履歴はGitに保持します。未確定の購入・公開アプリURLに架空リンクは設けません。
 
-条件付き一括承認・位置案内を含む本体Phase 4.5はmainへ統合済みです。実装の統合とアプリの一般公開・販売開始は別で、公開済みとは扱いません。当PRは未マージのサイト文案として提出します。GitHub Pages設定・公開main・問い合わせフォーム・販売窓口は変更しません。
+条件付き一括承認・位置案内を含む本体Phase 4.5はmainへ統合済みです。ソースコードの統合や公式サイトの文書更新だけで、PWA本体の配信・販売が開始されることはありません。実機受入と販売・提供条件の確認を残しており、未実施の受入や未確定の条件を完了済みとは案内しません。
