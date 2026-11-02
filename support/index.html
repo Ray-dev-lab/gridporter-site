@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>サポート | GridPorter</title>
-  <meta name="description" content="GridPorterの取得・Recipe・Excel/CSV出力・比較・データ削除の確認方法と、不具合相談時の情報の整理について。">
+  <meta name="description" content="GridPorter PWAのファイル取込、仕入価格改定確認、Recipe・比較、Excel/CSV出力、保存・復元と問い合わせの案内。Founderは未販売です。">
   <meta name="theme-color" content="#17634b">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -12,7 +12,7 @@
   <meta property="og:locale" content="ja_JP">
   <meta property="og:site_name" content="GridPorter">
   <meta property="og:title" content="サポート | GridPorter">
-  <meta property="og:description" content="GridPorterの取得・Recipe・Excel/CSV出力・比較・データ削除の確認方法と、不具合相談時の情報の整理について。">
+  <meta property="og:description" content="GridPorter PWAのファイル取込、仕入価格改定確認、Recipe・比較、Excel/CSV出力、保存・復元と問い合わせの案内。Founderは未販売です。">
   <!-- site-metadata:start -->
   <link rel="canonical" href="https://ray-dev-lab.github.io/gridporter-site/support/">
   <meta property="og:url" content="https://ray-dev-lab.github.io/gridporter-site/support/">
@@ -25,21 +25,16 @@
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
 <header class="site-header"><div class="wrap header-inner"><a class="brand" href="../"><img src="../assets/favicon.svg" width="34" height="34" alt="">GridPorter</a>
-<nav class="site-nav" aria-label="メインナビゲーション"><a href="../index.html#features">機能</a><a href="../index.html#plans">Free / Pro</a><a href="../privacy/">プライバシー</a><a href="../support/" aria-current="page">サポート</a></nav>
+<nav class="site-nav" aria-label="メインナビゲーション"><a href="../index.html#features">機能</a><a href="../index.html#plans">Free / Founder</a><a href="../privacy/">プライバシー</a><a href="../support/" aria-current="page">サポート</a></nav>
 </div></header>
-<main id="main" class="wrap"><article class="document"><span class="kicker">GRIDPORTER</span><h1>サポートガイド</h1><p class="intro">取得・編集・出力で困ったときの確認項目をまとめました。</p><p class="updated">最終更新：2026年10月29日 · 対象：0.4.2 beta</p><p><a class="button secondary" href="#contact-options">お問い合わせのご案内</a></p><nav class="toc" aria-label="目次"><ol><li><a href="#capture">取得できない・途中で止まる</a></li><li><a href="#recipe">Recipe・比較</a></li><li><a href="#export">Excel・CSV・コピー</a></li><li><a href="#privacy">データの保存・削除</a></li><li><a href="#billing">課金・ライセンス</a></li><li><a href="#contact">お問い合わせ時の確認</a></li></ol></nav>
-<h2 id="capture">取得できない・途中で止まる</h2><ol><li>対象ページの表示が完了し、必要な表・一覧が見えているか確認します。</li><li>拡張機能を更新した場合は、対象ページを再読み込みしてから選び直します。</li><li>取得完了度、終了理由、Diagnosticsの警告、取得行数を確認します。元ページの件数と照合してください。</li><li>複数ページ・動的な追加取得・スクロールはProのβ機能です。対象のボタンやスクロール領域、利用条件を確認します。</li><li>途中結果を保存していた場合は、設定画面の「途中までの結果を開く」から確認できます。自動再開はしません。</li></ol><p>仮想スクロールや独自構造など、取得できない一覧があります。ログイン、CAPTCHAやアクセス制限の回避は行わず、対象サイトの規約とアクセス権を確認してください。</p>
-<h2 id="recipe">Recipeを使えない・比較が合わない</h2><p>Recipeは取得・整形の設定です。保存したときからページの構造が変わると、候補が見つからない場合があります。対象のページと範囲を選び直し、内容を確認してください。ProのRepairは候補を確認して適用する機能です。</p><p>比較には、保存したSnapshotと、行を識別できる商品ID・URL等の列を使います。空欄や重複キーのある行は正しく対応付けられません。比較基準、選択した列、保存期間を確認してください。Datasetを削除しても比較履歴は別に残ります。</p><p>RecipeのImport / Exportでは設定ファイルにもURL・列名等の業務情報が含まれ得ます。公開の場にそのまま添付しないでください。</p>
-<h2 id="export">Excel・CSV・コピーの結果を確認する</h2><ul><li>価格・数字・日付の整形設定と、プレビューの実際の値を確認してください。</li><li>商品コード等の先頭ゼロ、長い数字、日付の解釈は貼り付け先やファイルの開き方で変わる場合があります。</li><li>列の並び・行数・改行・文字化けがないか、出力ファイルを開いて確認してください。</li><li>保存に失敗した場合は、ブラウザーのダウンロード設定や端末の保存先を確認してください。</li></ul><p>重要なデータは元ページと照合してください。クリップボードの内容は、利用者自身が選んだアプリへ貼り付けます。</p>
-<h2 id="privacy">データの保存・削除について</h2><p>抽出データは「保存しない・1日・7日」、比較履歴は「30日・90日・365日・削除するまで」から選べます。設定画面で一時取得データと比較履歴を別々に削除してください。Recipeも別管理です。表示中のプレビューや出力済みファイルは別途閉じる・削除する必要があります。</p><p>詳しい保存先、期限判定、通信・共有の範囲は<a href="../privacy/">プライバシーポリシー</a>をご覧ください。</p>
-<h2 id="billing">課金・ライセンスについて</h2><p>現在、有料プランの販売は行っていません。Pro機能はβテスト中です。将来の購入・ライセンス・更新・解約に関するご案内は、販売開始時に掲載します。</p>
-<h2 id="contact">お問い合わせの前に確認すること</h2><p>不具合、取得できないページ、Recipe、Excel/CSV出力、プライバシーに関する相談では、以下を確認すると状況の整理に役立ちます。</p><pre class="code-block">・GridPorterのバージョン
-・Chromeのバージョン / OS
-・利用している機能・取得モード
+<main id="main" class="wrap"><article class="document"><span class="kicker">GRIDPORTER</span><h1>サポートガイド</h1><p class="intro">ファイル取込・価格改定確認・編集・出力で困ったときの確認項目をまとめました。</p><p class="updated">最終更新：2026年11月2日 · 対象：PWA・販売／公開前のレビュー案</p><p><a class="button secondary" href="#contact-options">お問い合わせのご案内</a></p><nav class="toc" aria-label="目次"><ol><li><a href="#capture">読み込めない・BLOCKで止まる</a></li><li><a href="#recipe">Recipe・比較</a></li><li><a href="#export">Excel・CSV・コピー</a></li><li><a href="#privacy">データの保存・削除</a></li><li><a href="#billing">課金・ライセンス</a></li><li><a href="#contact">お問い合わせ時の確認</a></li></ol></nav>
+<h2 id="capture">読み込めない・BLOCKで止まる</h2><p>元ファイルの複製を保持し、形式・容量・文字コード・シート／見出しを確認。重複や欠損は案内された取込後データ行と列を確認し、複製で修正して再取込してください。取込後行番号をExcelの行番号と混同しないでください。判定できない位置は推測表示しません。</p><p>XLSXの数式は評価せず拒否します。確認済みの値を別ファイルへ保存するか、結合セルを複製で解除して再取込してください。通常の別タブからの直接抽出やページ送り／ScrollはPWAにありません。</p><h2 id="recipe">Recipe・比較・判断</h2><p>保存業務のキー・列対応・保護列・税／単位・閾値を今回の入力と確認し、再照合してください。入力や条件を変えると承認は無効です。一括承認は警告なしの未判断候補だけを全候補から選び、検索や表示ページの範囲とは別です。明示保留・除外・既承認を変えません。取消は直前の一括操作のみで、後から個別判断を変えた場合は使えません。</p><h2 id="export">Excel・CSV・コピー</h2><p>行／列・内部表・比較・資料の上限は別です。<a href="../index.html#limits">上限一覧</a>を確認し分割してください。先頭ゼロや長いコードはExcel側のCSV解釈でも変わり得るためXLSXで確認してください。資料は外部反映や更新完了ではなく、確認用の更新案です。</p><h2 id="privacy">保存・更新・復元</h2><p>保存とバックアップを先に行い、不調時にサイトデータを最初に消さないでください。旧版からの更新は新しい版の表示と保存値で確認し、通知が消えたことだけで成功としません。保存領域ごとの削除範囲、入力Snapshotを含むバックアップ、利用権ファイルの保管を確認してください。</p><h2 id="billing">購入・利用権</h2><p>現在は未販売です。購入URL・価格・納品時間・サポート／更新条件は未確定です。将来のSTORES購入後は、案内された署名付きライセンスファイルをPWAへ読み込む方式を準備しています。秘密鍵を利用者に渡す方式ではありません。</p><h2 id="contact">お問い合わせの前に確認すること</h2><p>不具合、ファイル取込、価格改定確認、Recipe、Excel/CSV出力、プライバシーに関する相談では、以下を確認すると状況の整理に役立ちます。</p><pre class="code-block">・GridPorterのバージョン
+・ブラウザーのバージョン / OS
+・利用している機能・入力形式
 ・実行した操作
 ・期待した結果と実際の結果
 ・終了理由・診断コード・行列数
-・再現する頻度</pre><p>拡張機能のサポート情報は、利用者が選んでコピーする仕組みです。自動送信されません。URLの共有は任意です。認証情報・クエリ等を除いたURLでも、パスに個人情報や機密情報が含まれていないか確認してください。</p><p>お問い合わせの情報の取扱いは、<a href="../privacy/#support-data">プライバシーポリシー</a>をご確認ください。</p>
+・再現する頻度</pre><p>PWAのサポート報告は、利用者が選んでコピーする仕組みです。自動送信されません。URLの共有は任意です。認証情報・クエリ等を除いたURLでも、パスに個人情報や機密情報が含まれていないか確認してください。</p><p>お問い合わせの情報の取扱いは、<a href="../privacy/#support-data">プライバシーポリシー</a>をご確認ください。</p>
 <h3 id="contact-options"><span id="contact-bug"></span><span id="contact-usage"></span><span id="contact-improvement"></span><span id="contact-privacy"></span><span id="contact-general"></span>お問い合わせフォーム</h3>
 <p id="support-form-help">お問い合わせは、下のボタンからお送りください。Googleフォームが別のタブで開きます。</p>
 <p>受付後、ご入力のメールアドレスへ受付番号をお送りします。内容を確認のうえ、担当者から回答します。</p>
