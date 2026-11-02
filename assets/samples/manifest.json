@@ -6,18 +6,18 @@
   "files": [
     {
       "name": "previous.csv",
-      "bytes": 391,
-      "sha256": "ba385024b9514c488238cc23db6d7a782da778792e7a401a1653e7d8a5033c44"
+      "bytes": 386,
+      "sha256": "fb65636f50f92bc07c471bcf3822a59fa773a401746eeae9e9d12fc91367fdf7"
     },
     {
       "name": "current.csv",
-      "bytes": 380,
-      "sha256": "cbaf5ffed6c05e9b8a7bb43324fab0f0ff31fba8c3f86f473c4f8cdfba683b18"
+      "bytes": 375,
+      "sha256": "5923a53b522b66385c992f4640fe04b62eaa84c6276293b064e9d2af68c0f994"
     },
     {
       "name": "master.csv",
-      "bytes": 391,
-      "sha256": "5f14ab25a57b74a2ffaf41a619ae494059049887272c01ee669143a9fa43a815"
+      "bytes": 386,
+      "sha256": "3dc2d22ab3987d990dcfc621486bcbf13d0b57c3c332e0f81d5fe4c85063983c"
     },
     {
       "name": "confirmation-sample.xlsx",
@@ -26,13 +26,13 @@
     },
     {
       "name": "proposal-sample.csv",
-      "bytes": 391,
-      "sha256": "cff5d44103b457ee3c6ba251e2588a67f682a05cf8c5fa7e21e45ae7168c3e2a"
+      "bytes": 386,
+      "sha256": "fbf9d02128eb1f29693785e78d5eb0a903af4f864feab382e341c1f9892b9c28"
     },
     {
       "name": "blocked-current.csv",
-      "bytes": 531,
-      "sha256": "a93a923dedbc654a2c10e3bdeb5be7f81f25a4aaa2d60045de53ec83661bfbaa"
+      "bytes": 523,
+      "sha256": "6427cc34b40bc9ff45f048af50b58946c9bdebd73fd2d4df3264320385e2f517"
     },
     {
       "name": "blocked-report.xlsx",
