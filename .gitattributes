@@ -1,0 +1,2 @@
+# Keep downloadable synthetic CSV bytes identical on Windows and Linux (SHA-256 manifest).
+assets/samples/*.csv -text
