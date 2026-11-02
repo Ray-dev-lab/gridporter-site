@@ -80,3 +80,13 @@ test('current PWA metadata agrees with page content and keeps standard and OG de
  assert.match(home,/最大2,000行/);assert.match(home,/最大20,000行/);
  assert.match(fs.readFileSync(path.join(root,'README.md'),'utf8'),/本体Phase 4\.5はmainへ統合済み/);
 });
+
+test('buyer guide orders real synthetic examples before plans and separates future onboarding from sale',()=>{
+ const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ const anchors=['id="example"','id="plans"','id="before-purchase"','id="getting-started"','id="details"'];
+ for(let i=1;i<anchors.length;i++)assert.ok(home.indexOf(anchors[i])>home.indexOf(anchors[i-1]));
+ for(const word of ['購買・商品管理','Founder開発検証画面','Freeで月次照合が利用できるという案内ではありません','購入直後の自動解放は約束していません','実機インストール・実Excel・本番納品の受入は未完了'])assert.ok(home.includes(word),word);
+ for(const file of ['previous.csv','current.csv','master.csv','confirmation-sample.xlsx','proposal-sample.csv'])assert.ok(home.includes('assets/samples/'+file));
+ assert.ok(fs.readFileSync(path.join(root,'assets/screenshots/price-review.jpg')).subarray(0,3).equals(Buffer.from([255,216,255])));
+ assert.doesNotMatch(home,/data-config-link="(?:purchaseUrl|appUrl|chromeWebStoreUrl)"|1,980|2,980|4,980/);
+});

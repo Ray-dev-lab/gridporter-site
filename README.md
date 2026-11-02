@@ -4,7 +4,7 @@
 
 [公式サイト](https://ray-dev-lab.github.io/gridporter-site/) · [プライバシーポリシー](https://ray-dev-lab.github.io/gridporter-site/privacy/) · [利用規約](https://ray-dev-lab.github.io/gridporter-site/terms/) · [サポート](https://ray-dev-lab.github.io/gridporter-site/support/)
 
-GridPorter PWAのFreeとFounder、月次価格改定確認、汎用表処理、形式別容量制限を案内する公式サイトです。
+GridPorter PWAのFreeとFounder、月次価格改定確認、汎用表処理、形式別容量制限を案内する公式サイトです。トップは担当業務、架空の実画面と入力/成果物サンプル、プラン差、主な非対応条件、利用開始、詳細の順に案内します。サンプルはすべて架空で、画面はFounder開発検証と明記します。動画は未録画で、静止画や生成資料を動画/実Excel受入の実績とは扱いません。
 
 GitHub Pages上での公式サイトの公開は、GridPorter PWA本体の一般公開・販売開始とは異なります。PWAは一般公開前・未販売で、実機受入は未完了です。購入・公開アプリURL、価格、ライセンス発行までの時間、サポート期間・更新条件は未確定です。
 
