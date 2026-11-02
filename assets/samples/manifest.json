@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "generation": "GridPorter shared engine; synthetic data, not actual customer work or real Excel acceptance",
+  "approved": 1,
+  "reviewHeld": 2,
+  "files": [
+    {
+      "name": "previous.csv",
+      "bytes": 391,
+      "sha256": "ba385024b9514c488238cc23db6d7a782da778792e7a401a1653e7d8a5033c44"
+    },
+    {
+      "name": "current.csv",
+      "bytes": 380,
+      "sha256": "cbaf5ffed6c05e9b8a7bb43324fab0f0ff31fba8c3f86f473c4f8cdfba683b18"
+    },
+    {
+      "name": "master.csv",
+      "bytes": 391,
+      "sha256": "5f14ab25a57b74a2ffaf41a619ae494059049887272c01ee669143a9fa43a815"
+    },
+    {
+      "name": "confirmation-sample.xlsx",
+      "bytes": 16709,
+      "sha256": "3e8aef4ea3006e304492712bdcc00066e93acbcb9337a1f034aaa78eaedd1253"
+    },
+    {
+      "name": "proposal-sample.csv",
+      "bytes": 391,
+      "sha256": "cff5d44103b457ee3c6ba251e2588a67f682a05cf8c5fa7e21e45ae7168c3e2a"
+    },
+    {
+      "name": "blocked-current.csv",
+      "bytes": 531,
+      "sha256": "a93a923dedbc654a2c10e3bdeb5be7f81f25a4aaa2d60045de53ec83661bfbaa"
+    },
+    {
+      "name": "blocked-report.xlsx",
+      "bytes": 17522,
+      "sha256": "7e2c7ce0d9e3c8e4797dbcfaf0a371702d00dd3af9f0fda793788a8f9deebdaf"
+    }
+  ]
+}
